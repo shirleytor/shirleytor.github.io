@@ -1,16 +1,30 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "shirleytor.github.io",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Hello there! Welcome to my website!\nI’m Shirley Toribio, a statistics student at Pomona College. My interests include machine learning, biostatistics, and topological data analysis. Feel free to look around my website!\n\n\n\nArt by me\n\n\nThis is a link to the github repository hosting this website: https://github.com/shirleytor/shirleytor.github.io"
+  },
+  {
+    "objectID": "data_viz.html",
+    "href": "data_viz.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "Data source here"
+  },
+  {
+    "objectID": "data_viz.html#analyzing-data-on-world-fairs-from-1855-to-2022",
+    "href": "data_viz.html#analyzing-data-on-world-fairs-from-1855-to-2022",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "Data source here"
+  },
+  {
+    "objectID": "data_viz.html#total-carbon-dioxide-emissions-from-major-natural-resource-companies",
+    "href": "data_viz.html#total-carbon-dioxide-emissions-from-major-natural-resource-companies",
+    "title": "Data Visualization",
+    "section": "Total carbon dioxide emissions from major natural resource companies",
+    "text": "Total carbon dioxide emissions from major natural resource companies\n\n\n\n\n\n\n\n\n\nData source here"
   }
 ]

@@ -1,0 +1,58 @@
+---
+title: "Data Visualization"
+---
+
+ 
+```{r, include=FALSE, warning=FALSE, results='hide'}
+library(tidyverse)
+library(janitor)
+```
+## Analyzing data on world fairs from 1855 to 2022
+
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+fair_data <- read_csv("worlds_fairs.csv") %>%
+  mutate(fair_length = case_when(
+    start_year == end_year ~ end_month - start_month,
+    start_year != end_year ~ (12-start_month) + end_month
+  ))
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
+  geom_point(color = "purple") +
+  geom_smooth(se=FALSE,color="blue") +
+    labs(
+    x = "Year that fair started",
+    y = "Number of countries attending",
+    title = "Number of countries attending world fair based on year"
+  ) +
+  theme_minimal()
+
+
+```
+
+Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-08-13).
+
+## Total carbon dioxide emissions from major natural resource companies 
+```{r, include=FALSE, warning=FALSE, message=FALSE}
+emissions_data <- read_csv("emissions.csv") %>% 
+  janitor::clean_names() %>%
+  group_by(commodity, year) %>%
+  summarize(total_emissions = sum(total_emissions_mt_co2e))
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(emissions_data, aes(x = year, y = total_emissions)) +
+  geom_smooth(aes(color = commodity),se=FALSE) +
+  theme_minimal() +
+    labs(
+    x = "Year",
+    y = "Total emissions of co2 in million tonnes ",
+    title = "Total emissions of co2 based on source"
+  ) 
+  
+
+
+```
+
+Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21).

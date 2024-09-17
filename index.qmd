@@ -2,10 +2,13 @@
 title: "shirleytor.github.io"
 ---
 
-This is a Quarto website.
+Hello there! Welcome to my website!
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
-```{r}
-1 + 1
-```
+I'm Shirley Toribio, a statistics student at Pomona College. My interests include machine learning, biostatistics, and topological data analysis. Feel free to look around my website! 
+
+![Art by me](art.png)
+
+
+
+This is a link to the github repository hosting this website: https://github.com/shirleytor/shirleytor.github.io
