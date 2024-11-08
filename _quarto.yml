@@ -9,6 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - data_viz.qmd
+      - project3_ds.qmd
 
 format:
   html:
