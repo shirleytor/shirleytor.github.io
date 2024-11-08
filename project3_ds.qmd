@@ -6,8 +6,6 @@ format: html
 editor: visual
 ---
 
-# Project 3
-
 ## Introduction
 
 Symmetric beta distributions and normal distributions are very similar to each other in shape. Due to this, in this project I examine how a 95% prediction interval that assumes data originates from a normal distribution would fare in terms of prediction accuracy and actual coverage probability of beta-distributed data. I define a confidence interval with "good" prediction accuracy as one that covers the actual mean of the data's parent distribution, and a confidence interval with good coverage probability as one that covers approximately .95 of the beta distribution. All data is generated from beta distributions with mean .5.
