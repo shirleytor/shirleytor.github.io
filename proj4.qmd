@@ -5,7 +5,7 @@ format: html
 editor: visual
 ---
 
-I plan to query data from the Wideband Acoustic Immittance Database, which is a repository of auditory measurements from different people. From this data, two graphs will be generated. One graph will replicate Figure 1 from Voss(2020) and the other will compare mean abosrbance measurements between people of different sexes over different frequencies.
+I plan to query data from the Wideband Acoustic Immittance Database, which is a repository of auditory measurements from different people. From this data, two graphs will be generated. One graph will replicate Figure 1 from Voss(2020) and the other will compare mean absorbance measurements between people of different sexes over different frequencies.
 
 ```{r, warning=FALSE, message=FALSE}
 library(RMariaDB)
