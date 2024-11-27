@@ -10,6 +10,7 @@ website:
         text: Home
       - data_viz.qmd
       - project3_ds.qmd
+      - proj4.qmd
 
 format:
   html:
