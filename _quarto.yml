@@ -12,7 +12,7 @@ website:
       - Beta_Simulation.qmd
       - Netflix_Analysis.qmd
       - SQL_Proj.qmd
-
+      - Presentation.qmd
 format:
   html:
     theme: cosmo

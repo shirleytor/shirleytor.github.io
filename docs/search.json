@@ -152,5 +152,68 @@
     "title": "Analysis of Netflix Horror Movies and TV Shows",
     "section": "Netflix TV Shows",
     "text": "Netflix TV Shows\n\ndata &lt;- netflix %&gt;% \n  filter(type == \"TV Show\") %&gt;%\n  mutate(num_seasons = as.numeric(str_extract(duration, \"\\\\d+\" )))\n\nggplot(data, aes(x = release_year, y = num_seasons)) +\n  geom_point() +\n  xlim(1970,2025)+\n  geom_smooth(se = FALSE) + \n  labs(\n    title = \"Relationship between release year and number of seasons of netflix tv show\",\n    x = \"Release year\",\n    y = \"Number of seasons\"\n  )\n\n\n\n\n\n\n\n\nBased on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.\nData source: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv"
+  },
+  {
+    "objectID": "Presentation.html#netflix-horror-movies",
+    "href": "Presentation.html#netflix-horror-movies",
+    "title": "Horror Movies and Simulation",
+    "section": "Netflix Horror Movies",
+    "text": "Netflix Horror Movies\n\nhorror_df\n\n  num         genre\n1 125        Horror\n2 110     Thrillers\n3  38      Comedies\n4  19 SciFi&Fantasy\n5  12          Cult\n6   2 Documentaties\n7   2      Romantic"
+  },
+  {
+    "objectID": "Presentation.html#diversity-of-horror",
+    "href": "Presentation.html#diversity-of-horror",
+    "title": "Horror Movies and Simulation",
+    "section": "Diversity of Horror",
+    "text": "Diversity of Horror"
+  },
+  {
+    "objectID": "Presentation.html#netflix-horror-movies-1",
+    "href": "Presentation.html#netflix-horror-movies-1",
+    "title": "Horror Movies and Simulation",
+    "section": "Netflix Horror Movies",
+    "text": "Netflix Horror Movies"
+  },
+  {
+    "objectID": "Presentation.html#beta-vs-normal-distribution",
+    "href": "Presentation.html#beta-vs-normal-distribution",
+    "title": "Horror Movies and Simulation",
+    "section": "Beta vs Normal Distribution",
+    "text": "Beta vs Normal Distribution"
+  },
+  {
+    "objectID": "Presentation.html#simulations",
+    "href": "Presentation.html#simulations",
+    "title": "Horror Movies and Simulation",
+    "section": "Simulations",
+    "text": "Simulations\n\n\n     n PI_percentage     lower     upper     cover alpha beta mean_in_interval\n1  443          0.95 0.4403352 0.5568129 0.9428698   133  133             TRUE\n2   26          0.95 0.4448102 0.5605112 0.9254171   119  119             TRUE\n3  407          0.95 0.4078696 0.5932908 0.9496711    55   55             TRUE\n4   92          0.95 0.4457683 0.5502979 0.9422730   165  165             TRUE\n5  146          0.95 0.4427047 0.5557669 0.9510242   151  151             TRUE\n6  496          0.95 0.4465372 0.5518538 0.9528252   177  177             TRUE\n7   15          0.95 0.4492564 0.5509363 0.9357580   165  165             TRUE\n8  222          0.95 0.3627269 0.6238542 0.9549371    29   29             TRUE\n9  105          0.95 0.4534146 0.5534927 0.9513511   197  197             TRUE\n10  29          0.95 0.4033115 0.6006820 0.9691219    59   59             TRUE"
+  },
+  {
+    "objectID": "Presentation.html#results",
+    "href": "Presentation.html#results",
+    "title": "Horror Movies and Simulation",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "Presentation.html#function-1-pi-interval-calculation",
+    "href": "Presentation.html#function-1-pi-interval-calculation",
+    "title": "Horror Movies and Simulation",
+    "section": "Function 1: PI Interval Calculation",
+    "text": "Function 1: PI Interval Calculation\n\nCI &lt;- function(data, coverage_prob){ \n  #Generates a normal prediction interval with an intended coverage probability of coverage_prob based on a vector of numeric data\n  lower_zscore &lt;- qnorm((1-coverage_prob)/2)\n  upper_zscore &lt;- qnorm(((1-coverage_prob)/2) + coverage_prob)\n  avg &lt;- mean(data)\n  stan_d &lt;- sd(data)\n  lower_bound &lt;- avg + lower_zscore*stan_d\n  upper_bound &lt;- avg + upper_zscore*stan_d\n  return(data.frame(PI_percentage = coverage_prob, lower = lower_bound, upper = upper_bound))\n}"
+  },
+  {
+    "objectID": "Presentation.html#function-2-one-simulation-of-beta-generated-data",
+    "href": "Presentation.html#function-2-one-simulation-of-beta-generated-data",
+    "title": "Horror Movies and Simulation",
+    "section": "Function 2: One simulation of beta-generated data",
+    "text": "Function 2: One simulation of beta-generated data\n\none_beta_simulation &lt;- function(n, alpha, beta, ci_prop){\n  #Assesses prediction accuracy and actual coverage probability of a normal prediction interval when used on a vector of numeric data of size n. The numeric data is generated from a beta distribution with parameters alpha and beta.\n  \n  cover_df &lt;- CI(rbeta(n, alpha, beta), ci_prop)\n  cover_prop &lt;- pbeta(cover_df[1, \"upper\"], alpha, beta) - pbeta(cover_df[1, \"lower\"], alpha, beta)\n  mean_in_interval &lt;- .5 &gt;= cover_df[1, \"lower\"] & .5 &lt;= cover_df[1,\"upper\"]\n  param_df &lt;- data.frame(cover = cover_prop, alpha = rep(alpha, nrow(cover_df)), beta = rep(beta, nrow(cover_df)), mean_in_interval = mean_in_interval)\n  df &lt;- cbind(cover_df, param_df)\n  return(df)\n}"
+  },
+  {
+    "objectID": "Presentation.html#function-3-multiple-beta-simulations",
+    "href": "Presentation.html#function-3-multiple-beta-simulations",
+    "title": "Horror Movies and Simulation",
+    "section": "Function 3: Multiple Beta simulations",
+    "text": "Function 3: Multiple Beta simulations\n\nbeta_sims_n &lt;- function(n){\n  #Iterates over a vector of possible alpha = beta values and applies one_beta_simulation to each possible value of alpha/beta. All simulations use data of sample size n.\n  df1 &lt;- map(parameters,\\(param) one_beta_simulation(n, param, param, ci) ) %&gt;%\n  list_rbind()\n  df2 &lt;- data.frame(n = rep(n, nrow(df1)))\n  df &lt;- cbind(df2, df1)\n  return(df)\n}"
   }
 ]

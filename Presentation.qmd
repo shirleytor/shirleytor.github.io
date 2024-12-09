@@ -1,0 +1,15 @@
+---
+title: "Website Presentation"
+author: "Shirley Toribio"
+subtitle: "December 9, 2024"
+format:
+  revealjs:
+    scrollable: true
+    slide-number: true
+    show-slide-number: all
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
