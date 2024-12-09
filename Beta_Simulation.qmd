@@ -8,7 +8,7 @@ editor: visual
 
 ## Introduction
 
-Symmetric beta distributions and normal distributions are very similar to each other in shape. Due to this, in this project I examine how a 95% prediction interval that assumes data originates from a normal distribution would fare in terms of prediction accuracy and actual coverage probability of beta-distributed data. I define a confidence interval with "good" prediction accuracy as one that covers the actual mean of the data's parent distribution, and a confidence interval with good coverage probability as one that covers approximately .95 of the beta distribution. All data is generated from beta distributions with mean .5.
+Symmetric beta distributions and normal distributions are very similar to each other in shape. Due to this, in this project I examine how a 95% prediction interval that assumes data originates from a normal distribution would fare in terms of prediction accuracy and actual coverage probability of beta-distributed data. I define a prediction interval with "good" prediction accuracy as one that covers the actual mean of the data's parent distribution, and a prediction interval with good coverage probability as one that covers approximately .95 of the beta distribution. All data is generated from beta distributions with mean .5.
 
 ## Simulations
 
@@ -21,7 +21,7 @@ library(tidyverse)
 Then, I define a few functions that will help me in my task.
 
 ```{r, warning=FALSE, message=FALSE}
-CI <- function(data, coverage_prob){ 
+PI <- function(data, coverage_prob){ 
   #Generates a normal prediction interval with an intended coverage probability of coverage_prob based on a vector of numeric data
   
   lower_zscore <- qnorm((1-coverage_prob)/2)
@@ -33,10 +33,10 @@ CI <- function(data, coverage_prob){
   return(data.frame(PI_percentage = coverage_prob, lower = lower_bound, upper = upper_bound))
 }
 
-one_beta_simulation <- function(n, alpha, beta, ci_prop){
+one_beta_simulation <- function(n, alpha, beta, pi_prop){
   #Assesses prediction accuracy and actual coverage probability of a normal prediction interval when used on a vector of numeric data of size n. The numeric data is generated from a beta distribution with parameters alpha and beta.
   
-  cover_df <- CI(rbeta(n, alpha, beta), ci_prop)
+  cover_df <- PI(rbeta(n, alpha, beta), pi_prop)
   cover_prop <- pbeta(cover_df[1, "upper"], alpha, beta) - pbeta(cover_df[1, "lower"], alpha, beta)
   mean_in_interval <- .5 >= cover_df[1, "lower"] & .5 <= cover_df[1,"upper"]
   param_df <- data.frame(cover = cover_prop, alpha = rep(alpha, nrow(cover_df)), beta = rep(beta, nrow(cover_df)), mean_in_interval = mean_in_interval)
@@ -46,7 +46,7 @@ one_beta_simulation <- function(n, alpha, beta, ci_prop){
 
 beta_sims_n <- function(n){
   #Iterates over a vector of possible alpha = beta values and applies one_beta_simulation to each possible value of alpha/beta. All simulations use data of sample size n.
-  df1 <- map(parameters,\(param) one_beta_simulation(n, param, param, ci) ) %>%
+  df1 <- map(parameters,\(param) one_beta_simulation(n, param, param, pi) ) %>%
   list_rbind()
   df2 <- data.frame(n = rep(n, nrow(df1)))
   df <- cbind(df2, df1)
@@ -59,7 +59,7 @@ Time to simulate over different parameter values and sample sizes!
 ```{r, warning=FALSE, message=FALSE}
 parameters <- seq(5, 200, by = 2)
 n <- 2:500
-ci <- .95
+pi <- .95
 
 beta_df <- map(n, \(n) beta_sims_n(n)) %>%
   list_rbind()
