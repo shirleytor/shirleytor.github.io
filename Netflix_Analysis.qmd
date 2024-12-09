@@ -1,5 +1,5 @@
 ---
-title: "Analysis of Netflix Horror Movies and TV Shows"
+title: "Netflix Analysis"
 author: "Shirley Toribio"
 format: html
 editor: visual
