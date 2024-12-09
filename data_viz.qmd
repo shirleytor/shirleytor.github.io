@@ -1,12 +1,15 @@
 ---
 title: "Data Visualization"
+author: "Shirley Toribio"
+format: html
+editor: visual
 ---
 
- 
 ```{r, include=FALSE, warning=FALSE, results='hide'}
 library(tidyverse)
 library(janitor)
 ```
+
 ## Analyzing data on world fairs from 1855 to 2022
 
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
@@ -33,7 +36,8 @@ ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
 
 Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-08-13).
 
-## Total carbon dioxide emissions from major natural resource companies 
+## Total carbon dioxide emissions from major natural resource companies
+
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
 emissions_data <- read_csv("emissions.csv") %>% 
   janitor::clean_names() %>%

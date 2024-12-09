@@ -1,0 +1,137 @@
+---
+title: "Analysis of Netflix Horror Movies and TV Shows"
+author: "Shirley Toribio"
+format: pdf
+editor: visual
+---
+
+```{r, warning=FALSE, message=FALSE}
+library(RTextTools) 
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+```{r, warning=FALSE, message=FALSE}
+netflix <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv')
+```
+
+## Netflix Horror Movies
+
+```{r, warning=FALSE, message=FALSE}
+horror_subgenre <- netflix %>%
+  filter(str_detect(listed_in, "Horror"), type == "Movie") %>%
+  mutate(listed_in = str_remove(listed_in, ", International Movies")) %>%
+  mutate(listed_in = str_remove(listed_in, ", Independent Movies")) %>%
+  mutate(listed_in = str_remove_all(listed_in, "[,]")) %>%
+  mutate(listed_in = str_remove_all(listed_in, "Movies")) %>%
+  mutate(listed_in = str_replace(listed_in, "[:space:]&[:space:]", "&")) %>%
+  group_by(listed_in) %>%
+  summarize(num = n()) %>%
+  arrange(desc(num)) %>%
+  mutate(listed_in = str_remove(listed_in, "Horror"))
+```
+
+```{r}
+num_thrillers <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Thrillers")) %>%
+  summarize(num = sum(num)) %>%
+  rename(Thrillers = 'str_detect(listed_in, \"Thrillers\")') %>%
+  filter(Thrillers == TRUE) %>%
+  mutate(genre = "Thrillers") %>%
+  select(-Thrillers)
+
+num_comedies <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Comedies")) %>%
+  summarize(num = sum(num)) %>%
+  rename(Comedies = 'str_detect(listed_in, \"Comedies\")') %>%
+  filter(Comedies == TRUE) %>%
+  mutate(genre = "Comedies") %>%
+  select(-Comedies)
+
+
+num_action_adventure <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Action/Adventure"))%>%
+  summarize(num = sum(num)) %>%
+  rename(Action_Adventure = 'str_detect(listed_in, \"Action/Adventure\")') %>%
+  filter(Action_Adventure == TRUE) %>%
+  mutate(genre = "Action&Adventure") %>%
+  select(-Action_Adventure)
+
+num_scifi_fantasy <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Sci-Fi&Fantasy")) %>%
+  summarize(num = sum(num)) %>%
+  rename(SciFi_Fantasy = 'str_detect(listed_in, \"Sci-Fi&Fantasy\")') %>%
+  filter(SciFi_Fantasy == TRUE) %>%
+  mutate(genre = "SciFi&Fantasy") %>%
+  select(-SciFi_Fantasy)
+
+num_cult <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Cult")) %>%
+  summarize(num = sum(num)) %>%
+  rename(Cult = 'str_detect(listed_in, \"Cult\")') %>%
+  filter(Cult == TRUE) %>%
+  mutate(genre = "Cult") %>%
+  select(-Cult)
+
+num_documentaries <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Documentaries")) %>%
+  summarize(num = sum(num)) %>%
+  rename(Documentaries = 'str_detect(listed_in, \"Documentaries\")') %>%
+  filter(Documentaries == TRUE)%>%
+  mutate(genre = "Documentaties") %>%
+  select(-Documentaries)
+
+num_romantic <- horror_subgenre %>%
+  group_by(str_detect(listed_in,"Romantic")) %>%
+  summarize(num = sum(num)) %>%
+  rename(Romantic = 'str_detect(listed_in, \"Romantic\")') %>%
+  filter(Romantic == TRUE) %>%
+  mutate(genre = "Romantic") %>%
+  select(-Romantic)
+
+num_horror <- horror_subgenre %>%
+  filter(listed_in == " ") %>%
+  mutate(listed_in = "horror") %>%
+  rename(genre = listed_in)
+
+horror_df <- rbind(num_thrillers, num_comedies, num_action_adventure, num_scifi_fantasy, num_cult, num_documentaries, num_romantic, num_horror ) %>%
+  as.data.frame() %>%
+  arrange(desc(num))
+horror_df
+```
+
+
+```{r}
+ggplot(horror_df, aes(x = genre, y = num)) +
+  geom_bar(stat = "identity", aes(fill = genre)) + labs(
+    title = "Subgenres among netflix horror movies",
+    x = "Subgenre of horror movie",
+    y = "Count"
+  ) + 
+  scale_x_discrete(guide = guide_axis(n.dodge=3)) +
+  guides(fill=guide_legend(title="Subgenres"))
+```
+
+Based on this plot of the number of horror movies with specific subgenres, it seems most netflix horror movies either do not have a subgenre or have thriller as their subgenre. Other subgenres appear substantially less present among Netflix horror movies.
+
+## Netflix TV Shows
+
+```{r, warning=FALSE, message=FALSE}
+data <- netflix %>% 
+  filter(type == "TV Show") %>%
+  mutate(num_seasons = as.numeric(str_extract(duration, "\\d+" )))
+
+ggplot(data, aes(x = release_year, y = num_seasons)) +
+  geom_point() +
+  xlim(1970,2025)+
+  geom_smooth(se = FALSE) + 
+  labs(
+    title = "Relationship between release year and number of seasons of netflix tv show",
+    x = "Release year",
+    y = "Number of seasons"
+  )
+```
+
+Based on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.
+
+Data source: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv

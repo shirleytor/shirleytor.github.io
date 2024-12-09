@@ -1,5 +1,5 @@
 ---
-title: "SQL"
+title: "Wideband Acoustic Immittance Data Visualization"
 author: "Shirley Toribio"
 format: html
 editor: visual
@@ -27,29 +27,25 @@ Subjects <- tbl(con_wai, "Subjects")
  #collect(Measurements)
 ```
 
-You can add options to executable code like this
-
 ```{sql}
 #| connection: con_wai
 #| output.var: "table1"
 SELECT Measurements.Identifier,
        Measurements.Frequency,
        AVG(Absorbance) AS mean_absorbance,
-       PI_Info.AuthorsShortList AS authors
+       CONCAT(PI_Info.AuthorsShortList," (", PI_Info.Year, ")"," N=", COUNT(DISTINCT Measurements.SubjectNumber) ,"; ",Measurements.Instrument) AS studies
 FROM Measurements
 JOIN PI_Info ON Measurements.Identifier = PI_Info.Identifier
-GROUP BY Measurements.Identifier, Measurements.Frequency;
+WHERE PI_Info.AuthorsShortList IN ("Abur et al.", "Feeney et al.", "Groon et al.", "Lewis and Neely", "Liu et al.", "Rosowski et al.", "Shahnaz et al.", "Shaver and Sun", "Sun et al.", "Voss and Allen", "Voss et al.", "Werner et al.") AND Measurements.Frequency BETWEEN 0 and 8000
+GROUP BY Measurements.Identifier, Measurements.Frequency,  Measurements.Instrument;
+
 ```
 
 ```{r, warning=FALSE, message=FALSE}
 table1 %>%
-  filter(authors %in% c("Abur et al.", "Feeney et al.", "Groon et al.", "Lewis and Neely", "Liu et al.", "Rosowski et al.", "Shahnaz et al.", "Shaver and Sun", "Sun et al.", "Voss and Allen", "Voss et al.", "Werner et al.")) %>%
   ggplot(aes(x = Frequency, y = mean_absorbance)) +
-  geom_smooth(aes(color = authors), se = FALSE) +
-  xlim(0, 8000)
+  geom_smooth(aes(color = studies), se = FALSE)
 ```
-
-The `echo: false` option disables the printing of code (only output is displayed).
 
 ```{sql}
 #| connection: con_wai
@@ -59,25 +55,18 @@ SELECT
   Subjects.Race AS race,
   Subjects.Ethnicity AS ethnicity,
   Subjects.Identifier,
-  Measurements.Identifier,
   Measurements.Frequency AS freq,
   AVG(Measurements.Absorbance) AS mean_absorbance
 FROM Subjects
 JOIN Measurements ON Subjects.SubjectNumber = Measurements.SubjectNumber 
 WHERE Subjects.Identifier = "Aithal_2013" AND Measurements.Identifier = "Aithal_2013"
 GROUP BY ethnicity, race, sex, freq;
-
-
-
-
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-table2 <- table2[,-c(4)]
 table2 %>%
   ggplot(aes(x = freq, y = mean_absorbance, color = sex)) +
   geom_smooth(se = FALSE)
-
 ```
 
 Using SQL queries, I filtered through and sorted data in a manner that allowed me to compare absorbance measurements across sexes and copy figure 1 of Voss(2020). I did this with 2 SQL queries and joined different tables from the same database to produce both graphs. Following each query, I used ggplot to plot mean absorbance measurements alongside frequency.
