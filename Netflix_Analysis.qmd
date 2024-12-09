@@ -91,7 +91,7 @@ num_romantic <- horror_subgenre %>%
 
 num_horror <- horror_subgenre %>%
   filter(listed_in == " ") %>%
-  mutate(listed_in = "horror") %>%
+  mutate(listed_in = "Horror") %>%
   rename(genre = listed_in)
 
 horror_df <- rbind(num_thrillers, num_comedies, num_action_adventure, num_scifi_fantasy, num_cult, num_documentaries, num_romantic, num_horror ) %>%
