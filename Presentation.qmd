@@ -1,5 +1,5 @@
 ---
-title: "Horror Movies and Simulation"
+title: "Presentation"
 author: "Shirley Toribio"
 subtitle: "December 9, 2024"
 format:
