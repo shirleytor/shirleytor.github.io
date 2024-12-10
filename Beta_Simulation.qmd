@@ -79,7 +79,7 @@ Time to simulate over different parameter values and sample sizes!
 
 ```{r, warning=FALSE, message=FALSE}
 parameters <- seq(5, 200, by = 2)
-n <- 2:5000
+n <- 2:500
 pi <- .95
 
 beta_df <- map(n, \(n) beta_sims_n(n)) %>%

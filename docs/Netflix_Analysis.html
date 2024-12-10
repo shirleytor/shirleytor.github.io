@@ -8,7 +8,7 @@
 
 <meta name="author" content="Shirley Toribio">
 
-<title>shirleytor.github.io - Analysis of Netflix Horror Movies and TV Shows</title>
+<title>shirleytor.github.io - Netflix Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,15 +133,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Beta_Simulation.html"> 
-<span class="menu-text">Simulation Study</span></a>
+<span class="menu-text">Simulation</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./Netflix_Analysis.html" aria-current="page"> 
-<span class="menu-text">Analysis of Netflix Horror Movies and TV Shows</span></a>
+<span class="menu-text">Netflix Analysis</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./SQL_Proj.html"> 
 <span class="menu-text">Wideband Acoustic Immittance Data Visualization</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Presentation.html"> 
+<span class="menu-text">Horror Movies and Simulation</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -169,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analysis of Netflix Horror Movies and TV Shows</h1>
+<h1 class="title">Netflix Analysis</h1>
 </div>
 
 
@@ -202,6 +206,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="netflix-horror-movies" class="level2">
 <h2 class="anchored" data-anchor-id="netflix-horror-movies">Netflix Horror Movies</h2>
+<p>In this analysis of Netflix horror movies, I look at all movies with horror listed as a genre and see what other genres are also listed for said movies. I then create a bar plot comparing the number of other genres listed among Netflix horror movies.</p>
+<p>First I filter for movies with horror listed as one of its genres and clean the variable listing movie genres so that it only includes genres that aren’t horror. This is all saved in the “horror_subgenre” object.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>horror_subgenre <span class="ot">&lt;-</span> netflix <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(listed_in, <span class="st">"Horror"</span>), type <span class="sc">==</span> <span class="st">"Movie"</span>) <span class="sc">%&gt;%</span></span>
@@ -215,6 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(num)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">listed_in =</span> <span class="fu">str_remove</span>(listed_in, <span class="st">"Horror"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Then I count the number of movies within “horror_subgenre” that list a specific secondary genre, with the secondary genres I consider being the following: thriller, comedy, romance, action/adventure, science fiction and fantasy, cult, documentary, and none. None means that the movie only has horror as its genre.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>num_thrillers <span class="ot">&lt;-</span> horror_subgenre <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="fu">str_detect</span>(listed_in,<span class="st">"Thrillers"</span>)) <span class="sc">%&gt;%</span></span>
@@ -250,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>SciFi_Fantasy)</span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>num_cult <span class="ot">&lt;-</span> horror_subgenre <span class="sc">%&gt;%</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="fu">str_detect</span>(listed_in,<span class="st">"Cult"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="fu">str_detect</span>(listed_in,<span class="st">"Cult"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num =</span> <span class="fu">sum</span>(num)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Cult =</span> <span class="st">'str_detect(listed_in, </span><span class="sc">\"</span><span class="st">Cult</span><span class="sc">\"</span><span class="st">)'</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Cult <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
@@ -275,22 +282,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>num_horror <span class="ot">&lt;-</span> horror_subgenre <span class="sc">%&gt;%</span></span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(listed_in <span class="sc">==</span> <span class="st">" "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">listed_in =</span> <span class="st">"Horror"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">genre =</span> listed_in)</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>horror_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(num_thrillers, num_comedies, num_action_adventure, num_scifi_fantasy, num_cult, num_documentaries, num_romantic, num_horror ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(num))</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>horror_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">listed_in =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">genre =</span> listed_in) <span class="sc">%&gt;%</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(genre, num)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>horror_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(num_thrillers, num_comedies, num_action_adventure, num_scifi_fantasy, num_cult, num_documentaries, num_romantic, num_horror ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(num)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(genre, num)</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>horror_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  num         genre
-1 125        Horror
-2 110     Thrillers
-3  38      Comedies
-4  19 SciFi&amp;Fantasy
-5  12          Cult
-6   2 Documentaties
-7   2      Romantic</code></pre>
+<pre><code>          genre num
+1          none 125
+2     Thrillers 110
+3      Comedies  38
+4 SciFi&amp;Fantasy  19
+5          Cult  12
+6 Documentaties   2
+7      Romantic   2</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -310,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Based on this plot of the number of horror movies with specific subgenres, it seems most netflix horror movies either do not have a subgenre or have thriller as their subgenre. Other subgenres appear substantially less present among Netflix horror movies.</p>
+<p>Based on this plot of the number of horror movies with specific secondary genres, it seems most netflix horror movies either do not have a secondary genre or have thriller as their secondary genre. Other secondary genres appear less present among Netflix horror movies.</p>
 </section>
 <section id="netflix-tv-shows" class="level2">
 <h2 class="anchored" data-anchor-id="netflix-tv-shows">Netflix TV Shows</h2>
