@@ -79,7 +79,7 @@ Time to simulate over different parameter values and sample sizes!
 
 ```{r, warning=FALSE, message=FALSE}
 parameters <- seq(5, 200, by = 2)
-n <- 2:500
+n <- 2:100
 pi <- .95
 
 beta_df <- map(n, \(n) beta_sims_n(n)) %>%
@@ -115,22 +115,6 @@ ggplot(n_means_df, aes(x = n, y = mean)) +
     subtitle = "difference between actual and intended coverage probability based on sample size",
   )
 
-n_means_df <- beta_df %>%
-  mutate(diff = cover - PI_percentage) %>%
-  group_by(n) %>%
-  summarize(mean = mean(diff), mu_in_interval = sum(mean_in_interval)/n()) %>%
-  filter(n %in% 1:100)
-
-ggplot(n_means_df, aes(x = n, y = mean)) + 
-  geom_point() + 
-  geom_hline(yintercept = 0, col = "black")  +
-  geom_hline(yintercept = avg, col = "red")  +
-  labs(
-    x = "sample size",
-    y = "difference between actual and intended coverage",
-    title = "Figure 1 close up",
-    subtitle = "difference between actual and intended coverage probability based on sample size",
-  )
 ```
 
 Figure 1 graphs the mean difference between the actual coverage probability and intended coverage probability (calculated as: actual coverage probability - intended coverage probability) per each sample size from 2 to 10000. A negative mean difference indicates the actual coverage probability tended to be less than the intended coverage probability, which is undesirable, while a positive mean difference indicates the actual cover probability tended to be more than the intended coverage probability. The mean difference between actual and intended coverage probability seems to converge to a value a little bit above 0 as the sample size increases, indicating that actual coverage probability tends to be more than the intended coverage and that this is more so as sample size increases.
