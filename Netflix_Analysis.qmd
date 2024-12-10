@@ -17,6 +17,10 @@ netflix <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/ti
 
 ## Netflix Horror Movies
 
+In this analysis of Netflix horror movies, I look at all movies with horror listed as a genre and see what other genres are also listed for said movies. I then create a bar plot comparing the number of other genres listed among Netflix horror movies.
+
+First I filter for movies with horror listed as one of its genres and clean the variable listing movie genres so that it only includes genres that aren't horror. This is all saved in the "horror_subgenre" object.
+
 ```{r, warning=FALSE, message=FALSE}
 horror_subgenre <- netflix %>%
   filter(str_detect(listed_in, "Horror"), type == "Movie") %>%
@@ -30,6 +34,8 @@ horror_subgenre <- netflix %>%
   arrange(desc(num)) %>%
   mutate(listed_in = str_remove(listed_in, "Horror"))
 ```
+
+Then I count the number of movies within "horror_subgenre" that list a specific secondary genre, with the secondary genres I consider being the following: thriller, comedy, romance, action/adventure, science fiction and fantasy, cult, documentary, and none. None means that the movie only has horror as its genre.
 
 ```{r}
 num_thrillers <- horror_subgenre %>%
@@ -66,7 +72,7 @@ num_scifi_fantasy <- horror_subgenre %>%
   select(-SciFi_Fantasy)
 
 num_cult <- horror_subgenre %>%
-  group_by(str_detect(listed_in,"Cult")) %>%
+  group_by(str_detect(listed_in,"Cult")) %>% 
   summarize(num = sum(num)) %>%
   rename(Cult = 'str_detect(listed_in, \"Cult\")') %>%
   filter(Cult == TRUE) %>%
@@ -91,12 +97,14 @@ num_romantic <- horror_subgenre %>%
 
 num_horror <- horror_subgenre %>%
   filter(listed_in == " ") %>%
-  mutate(listed_in = "Horror") %>%
-  rename(genre = listed_in)
+  mutate(listed_in = "none") %>%
+  rename(genre = listed_in) %>%
+  select(genre, num)
 
 horror_df <- rbind(num_thrillers, num_comedies, num_action_adventure, num_scifi_fantasy, num_cult, num_documentaries, num_romantic, num_horror ) %>%
   as.data.frame() %>%
-  arrange(desc(num))
+  arrange(desc(num)) %>%
+  select(genre, num)
 horror_df
 ```
 
@@ -111,7 +119,7 @@ ggplot(horror_df, aes(x = genre, y = num)) +
   guides(fill=guide_legend(title="Subgenres"))
 ```
 
-Based on this plot of the number of horror movies with specific subgenres, it seems most netflix horror movies either do not have a subgenre or have thriller as their subgenre. Other subgenres appear substantially less present among Netflix horror movies.
+Based on this plot of the number of horror movies with specific secondary genres, it seems most netflix horror movies either do not have a secondary genre or have thriller as their secondary genre. Other secondary genres appear less present among Netflix horror movies.
 
 ## Netflix TV Shows
 

@@ -44,7 +44,7 @@ GROUP BY Measurements.Identifier, Measurements.Frequency,  Measurements.Instrume
 ```{r, warning=FALSE, message=FALSE}
 table1 %>%
   ggplot(aes(x = Frequency, y = mean_absorbance)) +
-  geom_smooth(aes(color = studies), se = FALSE)
+  geom_line(aes(color = studies), se = FALSE)
 ```
 
 ```{sql}
@@ -66,7 +66,7 @@ GROUP BY ethnicity, race, sex, freq;
 ```{r, warning=FALSE, message=FALSE}
 table2 %>%
   ggplot(aes(x = freq, y = mean_absorbance, color = sex)) +
-  geom_smooth(se = FALSE)
+  geom_line(se = FALSE)
 ```
 
 Using SQL queries, I filtered through and sorted data in a manner that allowed me to compare absorbance measurements across sexes and copy figure 1 of Voss(2020). I did this with 2 SQL queries and joined different tables from the same database to produce both graphs. Following each query, I used ggplot to plot mean absorbance measurements alongside frequency.
