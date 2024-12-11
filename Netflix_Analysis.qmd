@@ -170,4 +170,4 @@ ggplot(data, aes(x = release_year, y = num_seasons)) +
 
 Based on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.
 
-Data source: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv
+Data source [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv).
