@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Presentation.html"> 
-<span class="menu-text">Horror Movies and Simulation</span></a>
+<span class="menu-text">Presentation</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>I plan to query data from the Wideband Acoustic Immittance Database, which is a repository of auditory measurements from different people. From this data, two graphs will be generated. One graph will replicate Figure 1 from Voss(2020) and the other will compare mean absorbance measurements between people of different sexes over different frequencies.</p>
+<p>I plan to query data from the Wideband Acoustic Immittance Database, which is a repository of auditory measurements from different people. From this data, two graphs will be generated. One graph will replicate Figure 1 from Voss (<a href="https://journals.lww.com/ear-hearing/citation/2019/11000/resource_review.21.aspx">2019</a>) and the other will compare mean absorbance measurements between babies of different sexes over different frequencies using data from Aithal et al.(<a href="https://www.sciencedirect.com/science/article/pii/S0165587612005332?via%3Dihub">2013</a> )</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMariaDB)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
@@ -208,54 +208,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a> <span class="co">#collect(Measurements)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>This is the abstract of Aithal et al.(2013):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [1 x 1]
+# Database: mysql  [waiuser@scidb.smith.edu:3306/wai]
+  Abstract                                                                      
+  &lt;chr&gt;                                                                         
+1 "&lt;p&gt; &lt;strong&gt; Objective: &lt;/strong&gt; Presently, normative wideband reflectance …</code></pre>
+</div>
+</div>
 <div class="cell" data-output.var="table1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Measurements.<span class="kw">Identifier</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       Measurements.Frequency,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(Absorbance) <span class="kw">AS</span> mean_absorbance,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">CONCAT</span>(PI_Info.AuthorsShortList,<span class="ot">" ("</span>, PI_Info.<span class="dt">Year</span>, <span class="ot">")"</span>,<span class="ot">" N="</span>, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> Measurements.SubjectNumber) ,<span class="ot">"; "</span>,Measurements.Instrument) <span class="kw">AS</span> studies</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> PI_Info <span class="kw">ON</span> Measurements.<span class="kw">Identifier</span> <span class="op">=</span> PI_Info.<span class="kw">Identifier</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> PI_Info.AuthorsShortList <span class="kw">IN</span> (<span class="ot">"Abur et al."</span>, <span class="ot">"Feeney et al."</span>, <span class="ot">"Groon et al."</span>, <span class="ot">"Lewis and Neely"</span>, <span class="ot">"Liu et al."</span>, <span class="ot">"Rosowski et al."</span>, <span class="ot">"Shahnaz et al."</span>, <span class="ot">"Shaver and Sun"</span>, <span class="ot">"Sun et al."</span>, <span class="ot">"Voss and Allen"</span>, <span class="ot">"Voss et al."</span>, <span class="ot">"Werner et al."</span>) <span class="kw">AND</span> Measurements.Frequency <span class="kw">BETWEEN</span> <span class="dv">0</span> <span class="kw">and</span> <span class="dv">8000</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Measurements.<span class="kw">Identifier</span>, Measurements.Frequency,  Measurements.Instrument;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Measurements.<span class="kw">Identifier</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       Measurements.Frequency,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(Absorbance) <span class="kw">AS</span> mean_absorbance,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">CONCAT</span>(PI_Info.AuthorsShortList,<span class="ot">" ("</span>, PI_Info.<span class="dt">Year</span>, <span class="ot">")"</span>,<span class="ot">" N="</span>, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> Measurements.SubjectNumber) ,<span class="ot">"; "</span>,Measurements.Instrument) <span class="kw">AS</span> studies</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> PI_Info <span class="kw">ON</span> Measurements.<span class="kw">Identifier</span> <span class="op">=</span> PI_Info.<span class="kw">Identifier</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> PI_Info.AuthorsShortList <span class="kw">IN</span> (<span class="ot">"Abur et al."</span>, <span class="ot">"Feeney et al."</span>, <span class="ot">"Groon et al."</span>, <span class="ot">"Lewis and Neely"</span>, <span class="ot">"Liu et al."</span>, <span class="ot">"Rosowski et al."</span>, <span class="ot">"Shahnaz et al."</span>, <span class="ot">"Shaver and Sun"</span>, <span class="ot">"Sun et al."</span>, <span class="ot">"Voss and Allen"</span>, <span class="ot">"Voss et al."</span>, <span class="ot">"Werner et al."</span>) <span class="kw">AND</span> Measurements.Frequency <span class="kw">BETWEEN</span> <span class="dv">0</span> <span class="kw">and</span> <span class="dv">8000</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Measurements.<span class="kw">Identifier</span>, Measurements.Frequency,  Measurements.Instrument;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Frequency, <span class="at">y =</span> mean_absorbance)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> studies), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Frequency, <span class="at">y =</span> mean_absorbance)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> studies), <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="SQL_Proj_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="SQL_Proj_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-output.var="table2">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  Subjects.Sex <span class="kw">AS</span> sex,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  Subjects.Race <span class="kw">AS</span> race,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  Subjects.Ethnicity <span class="kw">AS</span> ethnicity,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  Subjects.<span class="kw">Identifier</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  Measurements.Frequency <span class="kw">AS</span> freq,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(Measurements.Absorbance) <span class="kw">AS</span> mean_absorbance</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Subjects</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Measurements <span class="kw">ON</span> Subjects.SubjectNumber <span class="op">=</span> Measurements.SubjectNumber </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Subjects.<span class="kw">Identifier</span> <span class="op">=</span> <span class="ot">"Aithal_2013"</span> <span class="kw">AND</span> Measurements.<span class="kw">Identifier</span> <span class="op">=</span> <span class="ot">"Aithal_2013"</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> ethnicity, race, sex, freq;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  Subjects.Sex <span class="kw">AS</span> sex,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  Subjects.Race <span class="kw">AS</span> race,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  Subjects.Ethnicity <span class="kw">AS</span> ethnicity,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  Subjects.<span class="kw">Identifier</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  Measurements.Frequency <span class="kw">AS</span> freq,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(Measurements.Absorbance) <span class="kw">AS</span> mean_absorbance</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Subjects</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Measurements <span class="kw">ON</span> Subjects.SubjectNumber <span class="op">=</span> Measurements.SubjectNumber </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Subjects.<span class="kw">Identifier</span> <span class="op">=</span> <span class="ot">"Aithal_2013"</span> <span class="kw">AND</span> Measurements.<span class="kw">Identifier</span> <span class="op">=</span> <span class="ot">"Aithal_2013"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> ethnicity, race, sex, freq;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> freq, <span class="at">y =</span> mean_absorbance, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> freq, <span class="at">y =</span> mean_absorbance, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="SQL_Proj_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="SQL_Proj_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Using SQL queries, I filtered through and sorted data in a manner that allowed me to compare absorbance measurements across sexes and copy figure 1 of Voss(2020). I did this with 2 SQL queries and joined different tables from the same database to produce both graphs. Following each query, I used ggplot to plot mean absorbance measurements alongside frequency.</p>
+<p>Using SQL queries, I filtered through and sorted data in a manner that allowed me to compare absorbance measurements across babies of sexes with data from Aithal(<a href="">2013</a>)and copy figure 1 of Voss(2019). I did this with 2 SQL queries and joined different tables from the same database to produce both graphs. Following each query, I used ggplot to plot mean absorbance measurements alongside frequency.</p>
+<p>##References Aithal et al.&nbsp;2013. “Normative wideband reflectance measures in healthy neonates.” International Journal of Pediatric Otorhinolaryngology 77 (1). https://doi.org/10.1016/j.ijporl.2012.09.02 Voss, SE. 2019. “Resource Review.” Ear and Hearing 40 (6). https://doi.org/10.1097/AUD.0000000000000790.</p>
 
 
 

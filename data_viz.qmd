@@ -12,6 +12,12 @@ library(janitor)
 
 ## Analyzing data on world fairs from 1855 to 2022
 
+This analysis looks at world fairs. According to Wikipedia,
+
+> *a world's fair, also known as a universal exhibition or an expo, is a large global exhibition designed to showcase the achievements of nations. These exhibitions vary in character and are held in different parts of the world at a specific site for a period of time, typically between three and six months.*
+
+Due to various factors, however, it is possible that world fairs might not be as representative of nations worldwide as their description and name would suggest. Ideally, as many nations as possible should be included in a world fair in order for it to be truly representative. As such, I track the number of countries that have attended world fairs from 1851 to 2021 to see how world fairs have evolved in terms of country representation.
+
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
 fair_data <- read_csv("worlds_fairs.csv") %>%
   mutate(fair_length = case_when(
@@ -34,9 +40,13 @@ ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
 
 ```
 
+Based on the upward trend of the line of best fit, world fairs seem to have become more inclusive of countries as time has gone by. This trend towards increased inclusivity of countries seems to be especially present from 1975 to 2021. Modern world fair thus seem more representative of countries worldwide than world fairs of the past.
+
 Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-08-13).
 
 ## Total carbon dioxide emissions from major natural resource companies
+
+This analysis looks at emissions of carbon dioxide from major natural resource companies. The dataset used for this analysis originates from a [Carbon Majors](https://carbonmajors.org) [database](https://carbonmajors.org/Downloads).
 
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
 emissions_data <- read_csv("emissions.csv") %>% 
@@ -58,5 +68,6 @@ ggplot(emissions_data, aes(x = year, y = total_emissions)) +
 
 
 ```
+Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. 
 
 Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21).
