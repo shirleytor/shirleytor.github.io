@@ -27,6 +27,8 @@ fair_data <- read_csv("worlds_fairs.csv") %>%
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| fig.alt: "A scatter plot titled number of countries attending world fair based on year. Each point represents a specific world fair. The x-axis is year that fair started and the y-axis is number of countries attending. There is a line of best fit that trends upwards as year increases."
+
 ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
   geom_point(color = "purple") +
   geom_smooth(se=FALSE,color="blue") +
@@ -56,6 +58,8 @@ emissions_data <- read_csv("emissions.csv") %>%
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| fig.alt: "A line plot titled total emissions of co2 based on source. The x-axis is year and the y-axis is total emissions of co2 in million tonnes. There are nine lines on the plot and each line represents a different commodity. The nine commodoties represented are anthacite coal, bitumunous coal, cement, lignite coal, metallurgical coal, natural gas, oil, sub-bituminuous coal, and thermal coal. After the year 1950, the lines for oil, bituminuous coal, and natural gas are all higher than the other lines. After 1950, the line for oil is the highest, the line for bituminous coal is the second highest, and the line for natural gas is the third highest."
+
 ggplot(emissions_data, aes(x = year, y = total_emissions)) +
   geom_smooth(aes(color = commodity),se=FALSE) +
   theme_minimal() +
@@ -68,6 +72,6 @@ ggplot(emissions_data, aes(x = year, y = total_emissions)) +
 
 
 ```
-Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. 
+Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. Major natural resource companies should thus look into reducing their production of these commodities and shifting towards production of other commodoties in order to reduce their carbon dioxide emissions.
 
 Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21).

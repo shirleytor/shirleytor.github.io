@@ -7,11 +7,13 @@ editor: visual
 
 ## Analysis
 
-I plan to query data from the Wideband Acoustic Immittance Database, which is a repository of auditory measurements from different people. From this data, two graphs will be generated. One graph will replicate Figure 1 from Voss ([2019](https://journals.lww.com/ear-hearing/citation/2019/11000/resource_review.21.aspx)) and the other will compare mean absorbance measurements between babies of different sexes over different frequencies using data from Aithal et al.([2013](https://www.sciencedirect.com/science/article/pii/S0165587612005332?via%3Dihub) )
+I plan to query data from the Wideband Acoustic Immittance Database, which is a repository of auditory measurements from different people. From this data, two graphs will be generated. One graph will replicate Figure 1 from Voss([2019](https://journals.lww.com/ear-hearing/citation/2019/11000/resource_review.21.aspx)) and the other will compare mean absorbance measurements between babies of different sexes over different frequencies using data from Aithal et al.([2013](https://www.sciencedirect.com/science/article/pii/S0165587612005332?via%3Dihub)).
 
 This is the abstract of Aithal et al.(2013):
 
 > *Presently, normative wideband reflectance data are available for neonates who have passed a distortion product otoacoustic emission test. However, passing the distortion product otoacoustic emission test alone does not ensure normal middle ear function. The objective of this study was to establish normative wideband reflectance data in healthy neonates with normal middle ear function, as justified by passing a battery of tests.*
+
+Voss(2019) is a summarization of different studies analyzing auditory measurements among people.
 
 ```{r, warning=FALSE, message=FALSE}
 library(RMariaDB)

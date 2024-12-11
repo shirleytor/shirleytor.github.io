@@ -296,16 +296,16 @@ window.Quarto = {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    n PI_percentage     lower     upper     cover alpha beta mean_in_interval
-1  37          0.95 0.2853054 0.6720723 0.9320580    11   11             TRUE
-2  20          0.95 0.3273941 0.6728716 0.9017709    11   11             TRUE
-3  29          0.95 0.4582057 0.5475181 0.8873309   159  159             TRUE
-4  62          0.95 0.4495713 0.5516827 0.9576683   197  197             TRUE
-5  92          0.95 0.4468424 0.5546758 0.9662007   193  193             TRUE
-6  91          0.95 0.4129339 0.5787544 0.9374421    63   63             TRUE
-7  24          0.95 0.4491427 0.5543625 0.9325523   151  151             TRUE
-8  97          0.95 0.4219788 0.5714520 0.9253396    71   71             TRUE
-9  85          0.95 0.4125007 0.5797363 0.9539267    71   71             TRUE
-10 82          0.95 0.4138168 0.6154069 0.9615211    57   57             TRUE</code></pre>
+1  91          0.95 0.4240694 0.5708847 0.9448410    85   85             TRUE
+2  66          0.95 0.2971921 0.7450716 0.9135058     7    7             TRUE
+3  50          0.95 0.3101122 0.6597410 0.9600725    17   17             TRUE
+4  69          0.95 0.4243250 0.5815313 0.9820244   113  113             TRUE
+5  49          0.95 0.4073153 0.5979550 0.9422013    49   49             TRUE
+6  43          0.95 0.4027379 0.5814249 0.9320749    53   53             TRUE
+7  16          0.95 0.3829256 0.6446039 0.9956303    63   63             TRUE
+8  46          0.95 0.4647461 0.5460874 0.8840790   195  195             TRUE
+9   8          0.95 0.4161352 0.6022043 0.8779790    35   35             TRUE
+10 59          0.95 0.4437052 0.5493012 0.9388224   159  159             TRUE</code></pre>
 </div>
 </div>
 <p>This is a random sample of rows from the actual dataset, which has 48902 rows and 8 columns. Each row corresponds to a simulated random sample of size n from a beta distribution with parameters alpha and beta. For each random sample, a normal prediction interval was generated with bounds “lower” and “upper”. “PI_percentage” refers to the intended coverage probability and “cover” refers to the actual coverage probability of said prediction interval over the beta distribution the data was generated from. “mean_in_interval” is a binary variable that states if the prediction interval covered the mean of the distribution.</p>

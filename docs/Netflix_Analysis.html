@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#netflix-horror-movies" id="toc-netflix-horror-movies" class="nav-link" data-scroll-target="#netflix-horror-movies">Netflix Horror Movies</a></li>
   <li><a href="#netflix-tv-shows" id="toc-netflix-tv-shows" class="nav-link" data-scroll-target="#netflix-tv-shows">Netflix TV Shows</a></li>
   </ul>
@@ -202,8 +202,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This project consists of me analyzing data about Netflix shows and movies, with said analysis focusing on two aspects of these: horror movies and number of seasons in said shows. The dataset used for this analysis can be found <a href="https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv">here</a>. According to the <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md">Tidy Tuesday github page</a> I found it in, it originates from <a href="https://www.kaggle.com/datasets/shivamb/netflix-shows">Kaggle</a> and was gathered by Shival Bansal. Here is what he says about the data:</p>
 <blockquote class="blockquote">
 <p><em>This dataset consists of tv shows and movies available on Netflix as of 2019. The dataset is collected from Flixable which is a third-party Netflix search engine.</em></p>
@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Netflix_Analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Netflix_Analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" alt="A  bar chart titled subgenres among netflix horror movies. On the x-axis 7 secondary genres are shown, including comedy, cult, documentary, romance, none, thrillers, and sci fi fantasy. None has the highest count, followed by thriller. Both of their counts are significantly higher than the counts of the other secondary genres." width="672"></p>
 </figure>
 </div>
 </div>
@@ -409,6 +409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="netflix-tv-shows" class="level2">
 <h2 class="anchored" data-anchor-id="netflix-tv-shows">Netflix TV Shows</h2>
+<p>In this analysis of Netflix tv shows, I look at the number of seasons present in Netflix shows released in different years. A season in a Netflix show is a set of episodes pertaining to said show that was greenlit to be released in a certain time period. A show having multiple seasons means different sets of episodes were allowed to be released at different periods of time.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> netflix <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">"TV Show"</span>) <span class="sc">%&gt;%</span></span>
@@ -426,12 +427,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Netflix_Analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Netflix_Analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="A scatter plot titled relationship between release year and number of seasons of netflix tv show. Each point represents a specific netflix tv show. The x-axis is release year and the y-axis is number of seasons. There is also a line of best fit that slightly trends downwards as release year increases." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>A season in a Netflix show is a set of episodes pertaining to said show that was greenlit to be released in a specific timeframe. A show having multiple seasons means different sets of episodes were allowed to be released at different periods of time. Based on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.</p>
+<p>Based on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.</p>
 <p>Data source: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv</p>
 
 

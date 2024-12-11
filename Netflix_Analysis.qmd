@@ -11,7 +11,7 @@ library(tidyverse)
 library(tidytuesdayR)
 ```
 
-## Data
+## Introduction
 
 This project consists of me analyzing data about Netflix shows and movies, with said analysis focusing on two aspects of these: horror movies and number of seasons in said shows. The dataset used for this analysis can be found [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv). According to the [Tidy Tuesday github page](https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md) I found it in, it originates from [Kaggle](https://www.kaggle.com/datasets/shivamb/netflix-shows) and was gathered by Shival Bansal. Here is what he says about the data:
 
@@ -134,6 +134,7 @@ horror_df
 ```
 
 ```{r}
+#| fig.alt: "A  bar chart titled subgenres among netflix horror movies. On the x-axis 7 secondary genres are shown, including comedy, cult, documentary, romance, none, thrillers, and sci fi fantasy. None has the highest count, followed by thriller. Both of their counts are significantly higher than the counts of the other secondary genres."
 ggplot(horror_df, aes(x = genre, y = num)) +
   geom_bar(stat = "identity", aes(fill = genre)) + labs(
     title = "Subgenres among netflix horror movies",
@@ -148,7 +149,10 @@ Based on this plot of the number of horror movies with specific secondary genres
 
 ## Netflix TV Shows
 
+In this analysis of Netflix tv shows, I look at the number of seasons present in Netflix shows released in different years. A season in a Netflix show is a set of episodes pertaining to said show that was greenlit to be released in a certain time period. A show having multiple seasons means different sets of episodes were allowed to be released at different periods of time.
+
 ```{r, warning=FALSE, message=FALSE}
+#| fig.alt: "A scatter plot titled relationship between release year and number of seasons of netflix tv show. Each point represents a specific netflix tv show. The x-axis is release year and the y-axis is number of seasons. There is also a line of best fit that slightly trends downwards as release year increases."
 data <- netflix %>% 
   filter(type == "TV Show") %>%
   mutate(num_seasons = as.numeric(str_extract(duration, "\\d+" )))
@@ -164,6 +168,6 @@ ggplot(data, aes(x = release_year, y = num_seasons)) +
   )
 ```
 
-A season in a Netflix show is a set of episodes pertaining to said show that was greenlit to be released in a specific timeframe. A show having multiple seasons means different sets of episodes were allowed to be released at different periods of time. Based on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.
+Based on this plot, the number of seasons that a Netflix show has tends to be lower for shows released between 2005 and 2020 than for other shows. Due to the discreteness of values on the x-axis, multiple points are most likely overlapping. This explains why it appears the right side of the graph has less points below the line of best fit than above it even with the line trending downwards.
 
 Data source: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv
