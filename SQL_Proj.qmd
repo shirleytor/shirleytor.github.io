@@ -81,7 +81,7 @@ dbDisconnect(con_wai)
 
 Using SQL queries, I filtered through and sorted data in a manner that allowed me to compare absorbance measurements across babies of different sexes with data from Aithal([2013]())and copy figure 1 of Voss(2019). I did this with 2 SQL queries and joined different tables from the same database to produce both graphs. Following each query, I used ggplot to plot mean absorbance measurements alongside frequency.
 
-## References
+### References
 
 Aithal et al. 2013. "Normative wideband reflectance measures in healthy neonates." International Journal of Pediatric Otorhinolaryngology 77 (1). https://doi.org/10.1016/j.ijporl.2012.09.02
 
