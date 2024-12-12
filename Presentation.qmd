@@ -141,14 +141,15 @@ ggplot(beta, aes(x = x, y = beta_y)) +
 ## Function 1: PI Interval Calculation
 
 ```{r}
-CI <- function(data, coverage_prob){ 
+PI <- function(data, coverage_prob){ 
   #Generates a normal prediction interval with an intended coverage probability of coverage_prob based on a vector of numeric data
-  lower_zscore <- qnorm((1-coverage_prob)/2)
-  upper_zscore <- qnorm(((1-coverage_prob)/2) + coverage_prob)
+  n <- length(data)
+  lower_tscore <- qt((1-coverage_prob)/2, df = n - 1)
+  upper_tscore <- qt(((1-coverage_prob)/2) + coverage_prob, df = n - 1)
   avg <- mean(data)
   stan_d <- sd(data)
-  lower_bound <- avg + lower_zscore*stan_d
-  upper_bound <- avg + upper_zscore*stan_d
+  lower_bound <- avg + lower_tscore*stan_d * sqrt(1 + (1/n))
+  upper_bound <- avg + upper_tscore*stan_d * sqrt(1 + (1/n))
   return(data.frame(PI_percentage = coverage_prob, lower = lower_bound, upper = upper_bound))
 }
 
@@ -157,11 +158,13 @@ CI <- function(data, coverage_prob){
 ## Function 2: One simulation of beta-generated data
 
 ```{r}
-one_beta_simulation <- function(n, alpha, beta, ci_prop){
+one_beta_simulation <- function(n, alpha, beta, pi_prop){
   #Assesses prediction accuracy and actual coverage probability of a normal prediction interval when used on a vector of numeric data of size n. The numeric data is generated from a beta distribution with parameters alpha and beta.
   
-  cover_df <- CI(rbeta(n, alpha, beta), ci_prop)
-  cover_prop <- pbeta(cover_df[1, "upper"], alpha, beta) - pbeta(cover_df[1, "lower"], alpha, beta)
+  cover_df <- PI(rbeta(n, alpha, beta), pi_prop)
+  
+  cover_prop <- pbeta(cover_df[1, "upper"], alpha, beta) - pbeta(cover_df[1, "lower"], alpha, beta) #this is the proportion of the data's parent distribution that is actually covered by the normal prediction interval generated for said data.
+  
   mean_in_interval <- .5 >= cover_df[1, "lower"] & .5 <= cover_df[1,"upper"]
   param_df <- data.frame(cover = cover_prop, alpha = rep(alpha, nrow(cover_df)), beta = rep(beta, nrow(cover_df)), mean_in_interval = mean_in_interval)
   df <- cbind(cover_df, param_df)
@@ -175,7 +178,7 @@ one_beta_simulation <- function(n, alpha, beta, ci_prop){
 ```{r}
 beta_sims_n <- function(n){
   #Iterates over a vector of possible alpha = beta values and applies one_beta_simulation to each possible value of alpha/beta. All simulations use data of sample size n.
-  df1 <- map(parameters,\(param) one_beta_simulation(n, param, param, ci) ) %>%
+  df1 <- map(parameters,\(param) one_beta_simulation(n, param, param, pi) ) %>%
   list_rbind()
   df2 <- data.frame(n = rep(n, nrow(df1)))
   df <- cbind(df2, df1)
@@ -186,22 +189,25 @@ beta_sims_n <- function(n){
 ## Simulations
 
 ```{r echo=FALSE}
-CI <- function(data, coverage_prob){ 
+PI <- function(data, coverage_prob){ 
   #Generates a normal prediction interval with an intended coverage probability of coverage_prob based on a vector of numeric data
-  lower_zscore <- qnorm((1-coverage_prob)/2)
-  upper_zscore <- qnorm(((1-coverage_prob)/2) + coverage_prob)
+  n <- length(data)
+  lower_tscore <- qt((1-coverage_prob)/2, df = n - 1)
+  upper_tscore <- qt(((1-coverage_prob)/2) + coverage_prob, df = n - 1)
   avg <- mean(data)
   stan_d <- sd(data)
-  lower_bound <- avg + lower_zscore*stan_d
-  upper_bound <- avg + upper_zscore*stan_d
+  lower_bound <- avg + lower_tscore*stan_d * sqrt(1 + (1/n))
+  upper_bound <- avg + upper_tscore*stan_d * sqrt(1 + (1/n))
   return(data.frame(PI_percentage = coverage_prob, lower = lower_bound, upper = upper_bound))
 }
 
-one_beta_simulation <- function(n, alpha, beta, ci_prop){
+one_beta_simulation <- function(n, alpha, beta, pi_prop){
   #Assesses prediction accuracy and actual coverage probability of a normal prediction interval when used on a vector of numeric data of size n. The numeric data is generated from a beta distribution with parameters alpha and beta.
   
-  cover_df <- CI(rbeta(n, alpha, beta), ci_prop)
-  cover_prop <- pbeta(cover_df[1, "upper"], alpha, beta) - pbeta(cover_df[1, "lower"], alpha, beta)
+  cover_df <- PI(rbeta(n, alpha, beta), pi_prop)
+  
+  cover_prop <- pbeta(cover_df[1, "upper"], alpha, beta) - pbeta(cover_df[1, "lower"], alpha, beta) #this is the proportion of the data's parent distribution that is actually covered by the normal prediction interval generated for said data.
+  
   mean_in_interval <- .5 >= cover_df[1, "lower"] & .5 <= cover_df[1,"upper"]
   param_df <- data.frame(cover = cover_prop, alpha = rep(alpha, nrow(cover_df)), beta = rep(beta, nrow(cover_df)), mean_in_interval = mean_in_interval)
   df <- cbind(cover_df, param_df)
@@ -210,7 +216,7 @@ one_beta_simulation <- function(n, alpha, beta, ci_prop){
 
 beta_sims_n <- function(n){
   #Iterates over a vector of possible alpha = beta values and applies one_beta_simulation to each possible value of alpha/beta. All simulations use data of sample size n.
-  df1 <- map(parameters,\(param) one_beta_simulation(n, param, param, ci) ) %>%
+  df1 <- map(parameters,\(param) one_beta_simulation(n, param, param, pi) ) %>%
   list_rbind()
   df2 <- data.frame(n = rep(n, nrow(df1)))
   df <- cbind(df2, df1)

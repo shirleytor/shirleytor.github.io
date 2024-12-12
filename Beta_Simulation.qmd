@@ -34,11 +34,9 @@ PI <- function(data, coverage_prob){
 }
 ```
 
-PI is a function that takes a vector of numeric data and produces a high-density prediction interval intended to cover the proportion of said data's parent distribution, which is given by coverage_prob. This prediction interval is created under the assumption that the data is normally distributed (although we know it is not). Let $s$ be the sample standard deviation of our data, $n$ be the size of our sample, $\hat{p}$ be the mean of our data, and $t_{p,n-1}$ be the quantile value associated with the highest density coverage probability $p$ in a $t$ distribution with $n-1$ degrees of freedom. If we assume that our data is normal, then the highest density prediction interval with coverage probability $p$ is best predicted as 
+PI is a function that takes a vector of numeric data and produces a high-density prediction interval intended to cover the proportion of said data's parent distribution, which is given by coverage_prob. This prediction interval is created under the assumption that the data is normally distributed (although we know it is not). Let $s$ be the sample standard deviation of our data, $n$ be the size of our sample, $\hat{p}$ be the mean of our data, and $t_{p,n-1}$ be the quantile value associated with the highest density coverage probability $p$ in a $t$ distribution with $n-1$ degrees of freedom. If we assume that our data is normal, then the highest density prediction interval with coverage probability $p$ is best predicted as
 
-$$\hat{p} \pm t_{p,n-1}*s*\sqrt{1+\frac{1}{n}}$$
-PI uses this formula to generate the bounds of its prediction interval.
-
+$$\hat{p} \pm t_{p,n-1}*s*\sqrt{1+\frac{1}{n}}$$ PI uses this formula to generate the bounds of its prediction interval.
 
 ```{r}
 
@@ -58,7 +56,6 @@ one_beta_simulation <- function(n, alpha, beta, pi_prop){
 
 one_beta_simulation randomly samples $n$ data points from a beta distribution with parameters alpha and beta and calculates a normal prediction interval for said data using function PI. It then determines what proportion of the data's parent beta distribution is covered by the prediction interval and checks if the mean of said distribution is covered by the prediction interval.
 
-
 ```{r}
 
 beta_sims_n <- function(n){
@@ -72,8 +69,6 @@ beta_sims_n <- function(n){
 ```
 
 beta_sims_n maps over a vector of potential parameter values for a beta distribution with mean $.5$ and uses one_beta_simulation per each iteration, with all iterations taking the same value for the data's sample size. It randomly samples $n$ points multiple times from different beta distribution with mean .5 and generates normal prediction intervals for each sample. It also determines the proportion of the each sample's parent distribution that said intervals actually cover.
-
-
 
 Time to simulate over different parameter values and sample sizes!
 
@@ -139,7 +134,7 @@ ggplot(n_means_df, aes(x = n, y = mu_in_interval)) +
   
 ```
 
-Figure 2 plots the proportion of prediction intervals that cover mu = .5 per each sample size from 2 to 30. These points converge to 1 at a sample size of around 4, meaning for sample sizes of 4 or greater it is probable that all random samples with those samples sizes will produce normal-prediction intervals that cover the mean of the beta distribution said data originated from. 
+Figure 2 plots the proportion of prediction intervals that cover mu = .5 per each sample size from 2 to 30. These points converge to 1 at a sample size of around 4, meaning for sample sizes of 4 or greater it is probable that all random samples with those samples sizes will produce normal-prediction intervals that cover the mean of the beta distribution said data originated from.
 
 ```{r, warning=FALSE, message=FALSE}
 ns_of_interest <- c(5, 10, 30, 50, 100, 500)
@@ -159,7 +154,6 @@ ggplot(beta_df_2, aes(x = alpha, y = cover, color = sample_size)) +
 ```
 
 Figure 3 plots the actual coverage probability per each value of alpha and beta. Points and lines are colored based on sample size, which are described in the legend. Alpha and beta have the same values, by the way. All the lines of best fit seem close to being horizontal, meaning that there most likely is not a relationship between the values of alpha/beta and the actual coverage probability of the data's prediction interval. Based on the large overlap between lines, normal prediction intervals based on small amounts of data don't seem more likely to deviate from the intended coverage probability of the data's parent symmetric beta distribution, although they do have larger amounts of variability around their mean coverage probability.
-
 
 ## Conclusion
 
