@@ -74,7 +74,7 @@ Time to simulate over different parameter values and sample sizes!
 
 ```{r, warning=FALSE, message=FALSE}
 parameters <- seq(5, 200, by = 2)
-n <- 2:100
+n <- 2:500
 pi <- .95
 
 beta_df <- map(n, \(n) beta_sims_n(n)) %>%
@@ -99,20 +99,24 @@ n_means_df <- beta_df %>%
   group_by(n) %>%
   summarize(mean = mean(diff), mu_in_interval = sum(mean_in_interval)/n())
 avg <- mean(n_means_df$mean)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#| fig.alt: "A scatter plot titled difference between actual and intended coverage probability based on sample size. The x-axis is sample size and the y-axis is mean difference between actual and intended coverage probability. Each point corresponds to the mean difference between actual and intended coverage probability for simulations of a specific sample size. There are two horizontal lines with slopes of zero. One line has an intercept of zero and the other line has an intercept at the mean difference between actual and intended coverage probability over all simulations. The latter line is above the former line. Points have more vertical spread the closer their x-value is to zero and less vertical spread as their x-value increases."
 ggplot(n_means_df, aes(x = n, y = mean)) + 
   geom_point() + 
   geom_hline(yintercept = 0, col = "black")  +
   geom_hline(yintercept = avg, col = "red")  +
   labs(
     x = "sample size",
-    y = "difference between actual and intended coverage",
+    y = "mean difference between actual and intended coverage",
     title = "Figure 1",
     subtitle = "difference between actual and intended coverage probability based on sample size",
   )
 
 ```
 
-Figure 1 graphs the mean difference between the actual coverage probability and intended coverage probability (calculated as: actual coverage probability - intended coverage probability) per each sample size from 2 to 100. A negative mean difference indicates the actual coverage probability tended to be less than the intended coverage probability, which is undesirable, while a positive mean difference indicates the actual cover probability tended to be more than the intended coverage probability. The mean difference between actual and intended coverage probability seems to converge to a value a little bit above 0 as the sample size increases, indicating that actual coverage probability tends to be more than the intended coverage and that this is more so as sample size increases.
+Figure 1 graphs the mean difference between the actual coverage probability and intended coverage probability (calculated as: actual coverage probability - intended coverage probability) per each sample size from 2 to 500. A negative mean difference indicates the actual coverage probability tended to be less than the intended coverage probability, which is undesirable, while a positive mean difference indicates the actual cover probability tended to be more than the intended coverage probability. The mean difference between actual and intended coverage probability seems to converge to a value a little bit above 0 as the sample size increases, indicating that actual coverage probability tends to be more than the intended coverage and that this is more so as sample size increases.
 
 For small sample sizes the mean difference between actual and intended coverage probability has a lot more variance around 0 than it does for larger sample sizes, which can be attributed to sampling variability. Overall, absolute differences in actual coverage probability and intended coverage probability don't appear to extend beyond .02, indicating normal prediction intervals tend to have good coverage probability for symmetric, beta distributed data.
 
@@ -122,6 +126,11 @@ n_means_df <- beta_df %>%
   group_by(n) %>%
   summarize(mean = mean(diff), mu_in_interval = sum(mean_in_interval)/n()) %>%
   filter(n %in% 1:30)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#| fig.alt: "A scatter plot titled proportion of mu-inclusive prediction intervals based on sample size. The x-axis is sample size and the y-axis is proportion of mu-inclusive prediction intervals. Each point corresponds to the proportion of simulations of a specific sample size that include the mean of the data's parent distribution, which is half. The x-axis has an interval of two to thirty. The points all have a y-value of one when the x-value is four or greater."
+
 
 ggplot(n_means_df, aes(x = n, y = mu_in_interval)) + 
   geom_point()  +
@@ -140,6 +149,10 @@ Figure 2 plots the proportion of prediction intervals that cover mu = .5 per eac
 ns_of_interest <- c(5, 10, 30, 50, 100)
 beta_df_2 <- filter(beta_df,n %in% ns_of_interest) %>%
   mutate(sample_size = as.factor(n))
+```
+
+```{r, warning=FALSE, message=FALSE}
+#| fig.alt: "A scatter plot titled actual coverage probability based on parameter values. Each point represents one simulation and has a specific color. There are five colors representing sample sizes five, ten, thirty, fifty, and one hundred. There are also five lines in the plot. Each line is the line of best fit for points corresponding to a specific color. The x-axis is value of alpha and beta, and the y-axis is actual coverage probability. All the lines tend to overlap. The points corresponding to sample sizes five and ten are more spread out vertically than the points corresponding to other sample sizes."
 ggplot(beta_df_2, aes(x = alpha, y = cover, color = sample_size)) +
   geom_point() +
   geom_smooth(aes(line = n ), se = FALSE) +
