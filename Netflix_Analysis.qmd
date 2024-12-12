@@ -109,7 +109,7 @@ num_documentaries <- horror_subgenre %>%
   summarize(num = sum(num)) %>%
   rename(Documentaries = 'str_detect(listed_in, \"Documentaries\")') %>%
   filter(Documentaries == TRUE)%>%
-  mutate(genre = "Documentaties") %>%
+  mutate(genre = "Documentaries") %>%
   select(-Documentaries)
 
 num_romantic <- horror_subgenre %>%

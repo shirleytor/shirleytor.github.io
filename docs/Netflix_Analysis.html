@@ -355,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num =</span> <span class="fu">sum</span>(num)) <span class="sc">%&gt;%</span></span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Documentaries =</span> <span class="st">'str_detect(listed_in, </span><span class="sc">\"</span><span class="st">Documentaries</span><span class="sc">\"</span><span class="st">)'</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Documentaries <span class="sc">==</span> <span class="cn">TRUE</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genre =</span> <span class="st">"Documentaties"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genre =</span> <span class="st">"Documentaries"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Documentaries)</span>
 <span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>num_romantic <span class="ot">&lt;-</span> horror_subgenre <span class="sc">%&gt;%</span></span>
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3      Comedies  38
 4 SciFi&amp;Fantasy  19
 5          Cult  12
-6 Documentaties   2
+6 Documentaries   2
 7      Romantic   2</code></pre>
 </div>
 </div>
