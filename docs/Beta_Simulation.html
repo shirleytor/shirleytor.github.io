@@ -252,7 +252,7 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">PI_percentage =</span> coverage_prob, <span class="at">lower =</span> lower_bound, <span class="at">upper =</span> upper_bound))</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>PI is a function that takes a vector of numeric data and produces a high-density prediction interval intended to cover the proportion of said data’s parent distribution, which is given by coverage_prob. This prediction interval is created under the assumption that the data is normally distributed (although we know it is not). Let <span class="math inline">\(s\)</span> be the sample standard deviation of our data, <span class="math inline">\(n\)</span> be the size of our sample, <span class="math inline">\(\hat{p}\)</span> be the mean of our data, and <span class="math inline">\(t_{p,n-1}\)</span> be the quantile value associated with the highest density coverage probability <span class="math inline">\(p\)</span> in a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom. If we assume that our data is normal, then the highest density prediction interval with coverage probability <span class="math inline">\(p\)</span> is best predicted as</p>
+<p>PI is a function that takes a vector of numeric data and produces a high-density prediction interval intended to cover the proportion of said data’s parent distribution given by coverage_prob. This prediction interval is created under the assumption that the data is normally distributed (although we know it is not). Let <span class="math inline">\(s\)</span> be the sample standard deviation of our data, <span class="math inline">\(n\)</span> be the size of our sample, <span class="math inline">\(\hat{p}\)</span> be the mean of our data, and <span class="math inline">\(t_{p,n-1}\)</span> be the quantile value associated with the highest density coverage probability <span class="math inline">\(p\)</span> in a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom. If we assume that our data is normal, then the highest density prediction interval with coverage probability <span class="math inline">\(p\)</span> is best predicted as</p>
 <p><span class="math display">\[\hat{p} \pm t_{p,n-1}*s*\sqrt{1+\frac{1}{n}}\]</span> PI uses this formula to generate the bounds of its prediction interval.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>one_beta_simulation <span class="ot">&lt;-</span> <span class="cf">function</span>(n, alpha, beta, pi_prop){</span>
@@ -295,17 +295,17 @@ window.Quarto = {
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(rows, \(i) beta_df[i,]) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    n PI_percentage     lower     upper     cover alpha beta mean_in_interval
-1  18          0.95 0.4343473 0.5544763 0.9717662   173  173             TRUE
-2   9          0.95 0.4212138 0.5717733 0.9954583   179  179             TRUE
-3  88          0.95 0.3541909 0.6453527 0.9316644    19   19             TRUE
-4  51          0.95 0.4336922 0.5685664 0.9847938   161  161             TRUE
-5  11          0.95 0.3632900 0.6351648 0.9991682    73   73             TRUE
-6  76          0.95 0.4028775 0.6059292 0.9351621    41   41             TRUE
-7  77          0.95 0.4532853 0.5526386 0.9342461   173  173             TRUE
-8  77          0.95 0.2927957 0.7305265 0.9662839    11   11             TRUE
-9   5          0.95 0.1574760 0.9067672 0.9999711    13   13             TRUE
-10 42          0.95 0.4386275 0.5582425 0.9080922    99   99             TRUE</code></pre>
+<pre><code>     n PI_percentage     lower     upper     cover alpha beta mean_in_interval
+1   18          0.95 0.3330108 0.6868096 0.9337133    13   13             TRUE
+2   64          0.95 0.4440284 0.5614393 0.9677109   167  167             TRUE
+3   39          0.95 0.4246678 0.5761443 0.9753457   109  109             TRUE
+4   54          0.95 0.4467233 0.5588992 0.9613860   171  171             TRUE
+5   44          0.95 0.4299380 0.5519605 0.9575632   151  151             TRUE
+6   89          0.95 0.4171579 0.6032781 0.9651362    67   67             TRUE
+7   87          0.95 0.4428925 0.5446572 0.9471621   191  191             TRUE
+8   27          0.95 0.4496611 0.5515554 0.8845403   119  119             TRUE
+9  100          0.95 0.3737001 0.6294515 0.9585572    31   31             TRUE
+10  80          0.95 0.4064495 0.5920598 0.9779207    75   75             TRUE</code></pre>
 </div>
 </div>
 <p>This is a random sample of rows from the actual dataset, which has 48902 rows and 8 columns. Each row corresponds to a simulated random sample of size n from a beta distribution with parameters alpha and beta. For each random sample, a normal prediction interval was generated with bounds “lower” and “upper”. “PI_percentage” refers to the intended coverage probability and “cover” refers to the actual coverage probability of said prediction interval over the beta distribution the data was generated from. “mean_in_interval” is a binary variable that states if the prediction interval covered the mean of the distribution.</p>
@@ -336,7 +336,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Figure 1 graphs the mean difference between the actual coverage probability and intended coverage probability (calculated as: actual coverage probability - intended coverage probability) per each sample size from 2 to 10000. A negative mean difference indicates the actual coverage probability tended to be less than the intended coverage probability, which is undesirable, while a positive mean difference indicates the actual cover probability tended to be more than the intended coverage probability. The mean difference between actual and intended coverage probability seems to converge to a value a little bit above 0 as the sample size increases, indicating that actual coverage probability tends to be more than the intended coverage and that this is more so as sample size increases.</p>
+<p>Figure 1 graphs the mean difference between the actual coverage probability and intended coverage probability (calculated as: actual coverage probability - intended coverage probability) per each sample size from 2 to 100. A negative mean difference indicates the actual coverage probability tended to be less than the intended coverage probability, which is undesirable, while a positive mean difference indicates the actual cover probability tended to be more than the intended coverage probability. The mean difference between actual and intended coverage probability seems to converge to a value a little bit above 0 as the sample size increases, indicating that actual coverage probability tends to be more than the intended coverage and that this is more so as sample size increases.</p>
 <p>For small sample sizes the mean difference between actual and intended coverage probability has a lot more variance around 0 than it does for larger sample sizes, which can be attributed to sampling variability. Overall, absolute differences in actual coverage probability and intended coverage probability don’t appear to extend beyond .02, indicating normal prediction intervals tend to have good coverage probability for symmetric, beta distributed data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n_means_df <span class="ot">&lt;-</span> beta_df <span class="sc">%&gt;%</span></span>
@@ -363,7 +363,7 @@ window.Quarto = {
 </div>
 <p>Figure 2 plots the proportion of prediction intervals that cover mu = .5 per each sample size from 2 to 30. These points converge to 1 at a sample size of around 4, meaning for sample sizes of 4 or greater it is probable that all random samples with those samples sizes will produce normal-prediction intervals that cover the mean of the beta distribution said data originated from.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ns_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">500</span>)</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ns_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">100</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>beta_df_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(beta_df,n <span class="sc">%in%</span> ns_of_interest) <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_size =</span> <span class="fu">as.factor</span>(n))</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(beta_df_2, <span class="fu">aes</span>(<span class="at">x =</span> alpha, <span class="at">y =</span> cover, <span class="at">color =</span> sample_size)) <span class="sc">+</span></span>

@@ -44,7 +44,7 @@ netflix <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/ti
 
 In this analysis of Netflix horror movies, I look at all movies with horror listed as a genre and see what other genres are also listed for said movies. I then create a bar plot comparing the number of other genres listed among Netflix horror movies.
 
-First I filter for movies with horror listed as one of its genres and clean the variable listing movie genres so that it only includes genres that aren't horror. This is all saved in the "horror_subgenre" object.
+First, I filter for movies with horror listed as one of its genres and clean the variable listing movie genres so that it only includes genres that aren't horror. This is all saved in the "horror_subgenre" object.
 
 ```{r, warning=FALSE, message=FALSE}
 horror_subgenre <- netflix %>%
@@ -60,7 +60,7 @@ horror_subgenre <- netflix %>%
   mutate(listed_in = str_remove(listed_in, "Horror"))
 ```
 
-Then I count the number of movies within "horror_subgenre" that list a specific secondary genre, with the secondary genres I consider being the following: thriller, comedy, romance, action/adventure, science fiction and fantasy, cult, documentary, and none. None means that the movie only has horror as its genre.
+Then, I count the number of movies within "horror_subgenre" that list a specific secondary genre, with the secondary genres I consider being the following: thriller, comedy, romance, action/adventure, science fiction and fantasy, cult, documentary, and none. None means that the movie only has horror as its genre.
 
 ```{r}
 num_thrillers <- horror_subgenre %>%

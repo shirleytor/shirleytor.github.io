@@ -293,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="netflix-horror-movies" class="level2">
 <h2 class="anchored" data-anchor-id="netflix-horror-movies">Netflix Horror Movies</h2>
 <p>In this analysis of Netflix horror movies, I look at all movies with horror listed as a genre and see what other genres are also listed for said movies. I then create a bar plot comparing the number of other genres listed among Netflix horror movies.</p>
-<p>First I filter for movies with horror listed as one of its genres and clean the variable listing movie genres so that it only includes genres that aren’t horror. This is all saved in the “horror_subgenre” object.</p>
+<p>First, I filter for movies with horror listed as one of its genres and clean the variable listing movie genres so that it only includes genres that aren’t horror. This is all saved in the “horror_subgenre” object.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>horror_subgenre <span class="ot">&lt;-</span> netflix <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(listed_in, <span class="st">"Horror"</span>), type <span class="sc">==</span> <span class="st">"Movie"</span>) <span class="sc">%&gt;%</span></span>
@@ -307,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(num)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">listed_in =</span> <span class="fu">str_remove</span>(listed_in, <span class="st">"Horror"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then I count the number of movies within “horror_subgenre” that list a specific secondary genre, with the secondary genres I consider being the following: thriller, comedy, romance, action/adventure, science fiction and fantasy, cult, documentary, and none. None means that the movie only has horror as its genre.</p>
+<p>Then, I count the number of movies within “horror_subgenre” that list a specific secondary genre, with the secondary genres I consider being the following: thriller, comedy, romance, action/adventure, science fiction and fantasy, cult, documentary, and none. None means that the movie only has horror as its genre.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>num_thrillers <span class="ot">&lt;-</span> horror_subgenre <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="fu">str_detect</span>(listed_in,<span class="st">"Thrillers"</span>)) <span class="sc">%&gt;%</span></span>
