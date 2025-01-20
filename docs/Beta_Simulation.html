@@ -8,7 +8,7 @@
 
 <meta name="author" content="Shirley Toribio">
 
-<title>shirleytor.github.io - Simulation</title>
+<title>shirleytor.github.io - Using Normal Prediction Intervals on Symmetric Beta-distributed data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,22 +156,40 @@ window.Quarto = {
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./data_viz.html"> 
-<span class="menu-text">Data Visualization</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-analysis">    
+        <li>
+    <a class="dropdown-item" href="./data_viz.html">
+ <span class="dropdown-text">Data Visualization</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./Beta_Simulation.html" aria-current="page"> 
-<span class="menu-text">Simulation</span></a>
+        <li>
+    <a class="dropdown-item" href="./Netflix_Analysis.html">
+ <span class="dropdown-text">Netflix Analysis</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Netflix_Analysis.html"> 
-<span class="menu-text">Netflix Analysis</span></a>
+        <li>
+    <a class="dropdown-item" href="./SQL_Proj.html">
+ <span class="dropdown-text">Wideband Acoustic Immittance Data Visualization</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./SQL_Proj.html"> 
-<span class="menu-text">Wideband Acoustic Immittance Data Visualization</span></a>
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simulations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Simulations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simulations">    
+        <li>
+    <a class="dropdown-item" href="./Beta_Simulation.html">
+ <span class="dropdown-text">Using Normal Prediction Intervals on Symmetric Beta-distributed data</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Bayesian_Optimization_Bernoulli.html">
+ <span class="dropdown-text">Bayesian Optimization with Bernoulli Data</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./Presentation.html"> 
 <span class="menu-text">Presentation</span></a>
@@ -204,8 +222,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Simulation</h1>
-<p class="subtitle lead">Using Normal Prediction Intervals on Symmetric Beta-distributed data</p>
+<h1 class="title">Using Normal Prediction Intervals on Symmetric Beta-distributed data</h1>
 </div>
 
 
@@ -296,16 +313,16 @@ window.Quarto = {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     n PI_percentage     lower     upper     cover alpha beta mean_in_interval
-1  119          0.95 0.4425942 0.5594488 0.9399698   129  129             TRUE
-2  420          0.95 0.4182923 0.5771250 0.9599025    83   83             TRUE
-3   89          0.95 0.4329045 0.5736984 0.9585099   105  105             TRUE
-4  110          0.95 0.4493292 0.5458561 0.9439310   197  197             TRUE
-5  392          0.95 0.3452496 0.6563130 0.9492547    19   19             TRUE
-6  494          0.95 0.4417945 0.5579416 0.9609310   157  157             TRUE
-7  460          0.95 0.2223840 0.7903329 0.9456662     5    5             TRUE
-8  365          0.95 0.4251919 0.5773645 0.9419651    77   77             TRUE
-9  352          0.95 0.4417557 0.5629539 0.9535169   135  135             TRUE
-10  13          0.95 0.4057513 0.6377786 0.9750873    55   55             TRUE</code></pre>
+1   59          0.95 0.3900841 0.5960407 0.9824005    67   67             TRUE
+2  285          0.95 0.2511328 0.7562218 0.9539120     7    7             TRUE
+3  290          0.95 0.4316878 0.5683384 0.9640922   117  117             TRUE
+4  265          0.95 0.3581912 0.6461785 0.9614755    25   25             TRUE
+5  442          0.95 0.4331669 0.5604021 0.9479443   117  117             TRUE
+6   44          0.95 0.4415080 0.5541817 0.9626715   171  171             TRUE
+7  154          0.95 0.4295536 0.5625095 0.9605554   121  121             TRUE
+8  342          0.95 0.4494578 0.5508355 0.9562184   197  197             TRUE
+9  314          0.95 0.4353803 0.5628191 0.9583003   127  127             TRUE
+10 150          0.95 0.3527974 0.6659731 0.9599464    21   21             TRUE</code></pre>
 </div>
 </div>
 <p>This is a random sample of rows from the actual dataset, which has 48902 rows and 8 columns. Each row corresponds to a simulated random sample of size n from a beta distribution with parameters alpha and beta. For each random sample, a normal prediction interval was generated with bounds “lower” and “upper”. “PI_percentage” refers to the intended coverage probability and “cover” refers to the actual coverage probability of said prediction interval over the beta distribution the data was generated from. “mean_in_interval” is a binary variable that states if the prediction interval covered the mean of the distribution.</p>

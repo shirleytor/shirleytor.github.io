@@ -1,6 +1,5 @@
 ---
-title: "Simulation"
-subtitle: "Using Normal Prediction Intervals on Symmetric Beta-distributed data"
+title: "Using Normal Prediction Intervals on Symmetric Beta-distributed data"
 author: "Shirley Toribio"
 format: html
 editor: visual

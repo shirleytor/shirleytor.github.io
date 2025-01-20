@@ -1,0 +1,92 @@
+---
+title: "Bayesian Optimization with Bernoulli Data"
+author: "Shirley Toribio"
+format: html
+editor: visual
+---
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+## Introduction
+
+"Taking the Human Out of the Loop: A Review of Bayesian Optimization" is a paper by Shahriari et al. that highlights the concepts and methods underpinning Bayesian Optimization and its applications. It first delves into the general concepts and methods behind Bayesian Optimization before delving into specific implementations of it for specific models. In general, Bayesian Optimization is a sequential method for estimating the optimal parameters of a model. Of interest are some unknown objective function, $f$, and some $x*$ such that \$x\* = \$arg max $f(x)$. $x$ is an element of a parameter space $X$ of interest. We also consider an observation $y$ that is obtained from evaluating $f(x)$. It is assumed to have been produced via a stochastic process involving $f(x)$ in which $E(y|f(x)) = f(x)$.
+
+In Bayesian optimization, one initially starts off with a prior describing beliefs over what $f$ might be and is interested in gaining a posterior that more accurately describes what $f$ might be via sequential updates. In order to update the posterior, an acquisition function $\alpha$ is used at the $n$th iteration to find a value $x_{n+1}$ that that maximizes it. At this same iteration, $x_{n+1}$ is then used to query a objective function $f_n$, the function most likely to be $f$ based on the version of the posterior at the $n$th iteration, for an observation $y_n$. Based on this new observation, the posterior is updated and used to determine $f_{n+1}$.
+
+Bayesian optimization can be used in a variety of settings and can be applied to both parametric and nonparametric models. This project will consider the parametric Bernoulli setting, in which a beta prior and a binomial likelihood are used. More specifically, it will implement the algorithm of Thompson Sampling for Beta Bernoulli Bandit as defined in section A of section II of Shahriari et al.(2016).
+
+## Thompson Sampling for Beta Bernoulli Bandit
+
+Suppose we have $k$ Bernoulli parameters of interest corresponding to $k$ objects of interest. Define an object of interest as $a \in 1,2,...k$. A bernoulli observation $y_i \in${$0,1$} has a mean $f(a_i)$ if observed repeatedly and given it was based on object $a_i$. Let the Bernoulli parameters corresponding to each object be $\theta_1,\theta_2,...\theta_k$ and consider the vector $\theta \in \mathbb{R^k}$ which has all $k$ Bernoulli parameters as scalars. Then a beta prior for $\theta$ can be defined as $$p(\theta|\alpha,\beta)= \prod_{i=1}^{k} beta(\theta_i | \alpha_i, \beta_i)$$
+
+in which $beta(\theta_i | \alpha_i, \beta_i)$ is the beta prior for parameter $\theta_i$. Now let $n_{i,1}$ be the number of successes attributed to $a_i$ and $n_{i,0}$ be the number of failures attributed to $a_i$. Then given data $D$ we can define a posterior for $\theta$ as $$p(\theta|D) = \prod_{i=1}^{k} beta(\theta_i | \alpha_i + n_{i,1}, \beta_i + n_{i,0} )$$
+
+After $n-1$ observations, Thomas Sampling can be considered a strategy for determining which object $a_n$ observation $y_{n}$ will be based on. The acquisition function in this setting is our posterior at the $n$th iteration, and we wish to choose the object $a_i$ that produces the maximum draw from said posterior. We then pull an observation corresponding to $a_i$ and use this observation to update the posterior. The exact algorithm is titled "Algorithm 2" in Shahriari et al.(2016).
+
+## Simulation
+
+I will consider the situation in which $k=3$ and I have no prior assumptions about what any $\theta_i$ might be. As such, each $\theta_i$ will have a prior of $beta(1,1)$ which means $\theta$ will also have a prior of $beta(1,1)$.
+
+```{r}
+#generating data from binomial distributions with with p = .81, p = .49,
+#and p = .37
+one_data <- rbinom(100,1,.81) 
+two_data <- rbinom(100,1,.49)
+three_data <- rbinom(100,1,.37)
+data <- list(one_data, two_data, three_data)
+n <- length(one_data) + length(two_data) + length(three_data)
+
+#defining prior parameters
+alpha <- rep(1,3)
+beta <- rep(1,3)
+
+ith <- c(0) #initializing sequence of indexes that indicate which distribution 
+#produced the maximum draw at the ith iteration.
+
+df <- data.frame()
+```
+
+```{r}
+for (i in 1:100){ #Repeating Thomas Sampling 100 times 
+data <- list(one_data, two_data, three_data)
+  for (i in 1:100){ #100 iterations
+    draws <- c()
+    for (j in 1:3){
+      draws <- c(draws, rbeta(1,alpha[j], beta[j]))
+    } 
+    index <- match(max(draws),draws) #identifying parameter which produces maximum draw
+    ith <- c(ith, index) 
+    draw_i <- sample(data[[index]], size = 1, replace = FALSE) #observing y_i based on this draw
+    
+    #updating posterior based on y_i
+    if ((draw_i == 0) & ith[i+1] != ith[1]){
+      beta[index] <- beta[index] + 1
+    }
+    else if ((draw_i == 1) & ith[i+1] != ith[1]){
+      alpha[index] <- alpha[index] + 1
+    }
+  }
+    means <- alpha/(alpha+beta)
+    df <- as.data.frame(rbind(df,means))
+    
+    #resetting TS priors
+    alpha <- rep(1,3)
+    beta <- rep(1,3)
+}
+
+mean1 <- mean(df[,1])
+mean2 <- mean(df[,2])
+mean3 <- mean(df[,3])
+actual_parameters <- c(.81,.49,.37)
+TS_mean_parameters <- c(mean1,mean2,mean3)
+TS_standard_deviation <- c(sd(df[,1]),sd(df[,2]),sd(df[,3]))
+as.data.frame(cbind(TS_mean_parameters, TS_standard_deviation, actual_parameters))
+```
+
+I used Thomas Sampling 100 times, with each time involving 100 iterations. "TS_parameters" displays the means of all the values most likely to be a specific parameter. Each of these values was determined by both the posteriors produced at the 100th iteration of every Thomas sample and the squared error loss function. "TS_standard_deviation" displays the sample standard deviation of all these values. The standard deviations would most likely have lower absolute values if informative priors had been used. They were quite large for estimations of $p = .49$ and $p=.37$, which would be problematic if only one Thomas Sample with $100$ observations had been used. Thomas Sampling at this sample size might result in more stable estimates with informative priors.
+
+## References
+
+Shahriari et al. 2016. "Taking the Human Out of the Loop: A Review of Bayesian Optimization." Proceedings of the IEEE 104 (1). https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7352306&tag=1
