@@ -1,5 +1,5 @@
 ---
-title: "Data Visualization"
+title: "World Fairs and CO2 Emissions"
 author: "Shirley Toribio"
 format: html
 editor: visual
@@ -72,6 +72,7 @@ ggplot(emissions_data, aes(x = year, y = total_emissions)) +
 
 
 ```
+
 Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. Major natural resource companies should thus look into reducing their production of these commodities and shifting towards production of other commodoties in order to reduce their carbon dioxide emissions.
 
 Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21).
