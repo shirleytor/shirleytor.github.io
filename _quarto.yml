@@ -8,11 +8,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - text: "Data Analysis"
-        menu:
+      - text: "Data Visualizations"
+        menu: 
           - data_viz.qmd
           - Netflix_Analysis.qmd
           - SQL_Proj.qmd
+      - text: "Data Analysis"
+        menu:
+          - Pets_SriLanka.qmd
       - text: "Simulations"
         menu: 
           - Beta_Simulation.qmd
