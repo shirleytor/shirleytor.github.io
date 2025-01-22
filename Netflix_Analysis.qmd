@@ -1,5 +1,5 @@
 ---
-title: "Netflix Analysis"
+title: "Netflix"
 author: "Shirley Toribio"
 format: html
 editor: visual

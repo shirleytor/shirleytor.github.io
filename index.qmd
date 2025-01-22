@@ -8,4 +8,4 @@ I'm Shirley Toribio, a statistics student at Pomona College. My interests includ
 
 ![Art by me](art.png)
 
-This is a link to the github repository hosting this website: https://github.com/shirleytor/shirleytor.github.io
+The github repository hosting this website can be found [here](https://github.com/shirleytor/shirleytor.github.io).

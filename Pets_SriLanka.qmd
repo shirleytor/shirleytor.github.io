@@ -19,7 +19,7 @@ library(RTextTools)
 
 Pet ownership has been extremely common in human society for a significant portion of history. Within the last century, rates of pet ownership have increased as motives for pet ownership have shifted from practical to those concerning emotional well-being and entertainment (Konstantinova). Looking at ways to measure their overall perceived benefit can provide insight into the way different factors influence a pet’s perceived value. The cost of a pet is commonly understood as being one such way to measure a pet’s emotional, physical, and economic value, meaning that factors influencing a pet’s cost can provide insight into determinants of pet value and the nuances to their large importance in society. Two possible factors influencing pet value include the type of pet that is owned and the location where the pet originates from.
 
-This paper will measure the effect of these factors on pet value within the context of specific cities in Sri Lanka. Research into pet ownership trends in Anuradhapura, Sri Lanka suggests certain pets might be more valued than others based on their increased prevalence among pet owners (Rathish). Using two-way Analysis of Variance (ANOVA), the type of pet will be evaluated alongside whether a pet resides in either Gampaha, Kandy, or Colombo, which are cities in Sri Lanka, to determine if either influences the cost of a pet. A model based on factor effects will then be developed in accordance to the results of this analysis. In order to evaluate the effect of these factors on pet prices, section two of this paper will discuss the data used and its appropriateness for analysis, section three will discuss the usage of two-way ANOVA to evaluate these factors and the implications of its results, and section four will discuss important points to take away from this analysis and potential future research directions.
+This analysis will measure the effect of these factors on pet value within the context of specific cities in Sri Lanka. Research into pet ownership trends in Anuradhapura, Sri Lanka suggests certain pets might be more valued than others based on their increased prevalence among pet owners (Rathish). Using two-way Analysis of Variance (ANOVA), the type of pet will be evaluated alongside whether a pet resides in either Gampaha, Kandy, or Colombo, which are cities in Sri Lanka, to determine if either influences the cost of a pet. A model based on factor effects will then be developed in accordance to the results of this analysis. In order to evaluate the effect of these factors on pet prices, section two of this paper will discuss the data used and its appropriateness for analysis, section three will discuss the usage of two-way ANOVA to evaluate these factors and the implications of its results, and section four will discuss important points to take away from this analysis and potential future research directions.
 
 ## Methods
 
@@ -31,10 +31,10 @@ unique<-unique(data[,5])
 
 ```
 
-
 The data used for this analysis originates from Ikman.lk, a popular website for buying pets in Sri Lanka. It was collected through a script that compiles data from posts about pet sales (Jayawardena). The dataset itself has eleven variables, with one of them consisting of a url identifier for the post it pertains to. For the purpose of this analysis, only three variables are being examined: pet price, which is a numeric continuous variable, type of animal being sold, which is a categorical variable, and city where the animal is being sold, which is also a categorical variable. Pet price is measured in Rupees, Sri Lanka’s national currency, and is the response variable in this analysis. Type of pet being sold is an explanatory variable that consists of the following pet types: dog, cat, fish, and bird. City where the pet is being sold is also an explanatory variable that consists of the cities of Gampaha, Kandy, and Colombo. In order for all sample groups in this analysis to be balanced, they all have the same sample size of 10 different pet prices. The total sample size across all sample groups is 120 different pet prices. The sample groups were formed by using R to filter for pet prices corresponding to a specific pet type and Sri Lankan city-district. Two random districts corresponding to a specific city were chosen, and the first five prices related to a specific pet from each district were chosen to be part of the city sample. For instance, the first five bird prices from Kadawatha, Gampaha and the first five bird prices from Kiribathgoda, Gampaha were chosen to form the sample corresponding to bird prices in Gampaha. Since the data is ordered randomly and the districts were chosen randomly, there is no bias involved with the selection of the data. Each of these samples is thus random and can be used for inference. Due to the small sample size per sample group, it is unlikely they reflect the actual population of pet prices corresponding to a specific animal in a specific city. The sample size should still be large enough to determine if either factor affects pet price, however.
 
-Data cleaning that samples from city-pet categories with 5 or more observations is performed with the code below. 
+Data cleaning that samples from city-pet categories with 5 or more observations is performed with the code below.
+
 ```{r, message=FALSE, warning=FALSE}
 more_than_100 = c() 
 for (each in unique){
@@ -91,7 +91,6 @@ combination <-rbind(Gampaha11,Gampaha12,Gampaha21,Gampaha22,Gampaha31,Gampaha32,
   ))
 ```
 
-
 ```{r, message=FALSE, warning=FALSE}
 inferior_fit <- aov(Price_in_Rupees~Animal_Type + Location, data=combination)
 anova(inferior_fit)
@@ -107,7 +106,6 @@ Cost_in_Rupees <- combination$Price_in_Rupees
 ```
 
 ## Data Analysis
-
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 inferior_fit <- aov(Price_in_Rupees~Animal_Type + Location, data=combination)
@@ -129,6 +127,7 @@ In order to perform the F test, homoscedasticity across all sample groups under 
 inferior_fit <- aov(Price_in_Rupees~Animal_Type + Location, data=combination)
 plot(inferior_fit,which = 1)
 ```
+
 Each group of points in this figure represents a specific subgroup of pet prices corresponding to a specific type of pet in a specific city. When the spread of points within each subgroup is compared to the spread of them in other subgroups, it is evident that different subgroups have different spreads, meaning they have different variances in pet price.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -143,9 +142,7 @@ The purpose of the ANOVA analysis was to see if either pet type or location indi
 plot(TukeyHSD(fit,conf.level=.975,which="Animal_Type"))
 ```
 
-From top to bottom, this figure presents confidence intervals for the following pairwise
-comparisons: cat-bird, dog-bird, fish-bird, dog-cat, fish-cat, and fish-dog. The family wise confidence level is 97.5% because comparisons concerning pet type all have an alpha value of .025. The confidence intervals for the cat-bird, dog-bird, fish-cat, and fish-dog comparisons do not cover zero, meaning this analysis suggests 97.5% confidence of these pet groups possessing different prices from one another throughout Colombo, Kandy, and Gampaha. Since the dog-cat and fish-bird comparisons cover zero, there does not appear to be a significant difference among both pairs of pet price averages throughout Colombo, Kandy, and Gampaha. Both of these sets of comparisons suggest there is an overall difference in price between mammalian pets and non-mammalian pets among the residents of Colombo, Kandy, and Gampaha, which corresponds to people in all three cities assigning differents levels of value to mammalian and non-mammalian pets. It is also possible that dogs and cats, as the most popular pets worldwide, have significantly higher prices in Colombo, Kandy, and Gampaha than all other pets, including other mammalian ones. In order to determine which hypothesis is accurate, however, more analysis would need to be conducted. Based on this analysis, an appropriate model for predicting
-the prices of pets in Gampaha, Kandy, and Colombo should consist of the average pet price per species of pet.
+From top to bottom, this figure presents confidence intervals for the following pairwise comparisons: cat-bird, dog-bird, fish-bird, dog-cat, fish-cat, and fish-dog. The family wise confidence level is 97.5% because comparisons concerning pet type all have an alpha value of .025. The confidence intervals for the cat-bird, dog-bird, fish-cat, and fish-dog comparisons do not cover zero, meaning this analysis suggests 97.5% confidence of these pet groups possessing different prices from one another throughout Colombo, Kandy, and Gampaha. Since the dog-cat and fish-bird comparisons cover zero, there does not appear to be a significant difference among both pairs of pet price averages throughout Colombo, Kandy, and Gampaha. Both of these sets of comparisons suggest there is an overall difference in price between mammalian pets and non-mammalian pets among the residents of Colombo, Kandy, and Gampaha, which corresponds to people in all three cities assigning differents levels of value to mammalian and non-mammalian pets. It is also possible that dogs and cats, as the most popular pets worldwide, have significantly higher prices in Colombo, Kandy, and Gampaha than all other pets, including other mammalian ones. In order to determine which hypothesis is accurate, however, more analysis would need to be conducted. Based on this analysis, an appropriate model for predicting the prices of pets in Gampaha, Kandy, and Colombo should consist of the average pet price per species of pet.
 
 ## Conclusions
 
