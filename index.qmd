@@ -4,7 +4,7 @@ title: "shirleytor.github.io"
 
 Hello there! Welcome to my website!
 
-I'm Shirley Toribio, a statistics student at Pomona College. My interests include machine learning, biostatistics, and topological data analysis. Feel free to look around my website!
+I'm Shirley Toribio, an aspiring statistician and data scientist. I completed my Bachelor of Arts in Mathematics, with a concentration in Statistics, in December 2024.
 
 ![Art by me](art.png)
 
