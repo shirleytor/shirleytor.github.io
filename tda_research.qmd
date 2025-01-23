@@ -4,4 +4,4 @@ resources:
   -Ken_Cooke_Fellowship--.pdf
 ---
 
-{{< pdf Ken_Cooke_Fellowship--.pdf >}}
+{{< pdf Ken_Cooke_Fellowship--.pdf width=100% height=100%>}}
