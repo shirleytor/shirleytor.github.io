@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+  resources: pdfjs
 
 website:
   title: "shirleytor.github.io"
@@ -20,6 +21,9 @@ website:
         menu: 
           - Beta_Simulation.qmd
           - Bayesian_Optimization_Bernoulli.qmd
+      - text: "Past Research"
+        menu: 
+          - SIBDS.qmd
       - Presentation.qmd
 format:
   html:

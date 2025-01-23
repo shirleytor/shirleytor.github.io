@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "shirleytor.github.io",
     "section": "",
-    "text": "Hello there! Welcome to my website!\nI’m Shirley Toribio, a statistics student at Pomona College. My interests include machine learning, biostatistics, and topological data analysis. Feel free to look around my website!\n\n\n\nArt by me\n\n\nThe github repository hosting this website can be found here."
+    "text": "Hello there! Welcome to my website!\nI’m Shirley Toribio, an aspiring statistician and data scientist. I completed my Bachelor of Arts in Mathematics, with a concentration in Statistics, in December 2024. This website displays some of my past work.\n\n\n\nquarto add jmgirard/embedpdfArt by me\n\n\nThe github repository hosting this website can be found here."
   },
   {
     "objectID": "data_viz.html",
@@ -320,5 +320,12 @@
     "title": "Pet Ownership in Sri Lanka",
     "section": "References",
     "text": "References\nJayawardena, Lasal. “Sri Lanka Animal Prices Dataset.” Kaggle, 31 Oct. 2021, www.kaggle.com/datasets/lasaljaywardena/sri-lanka-animal-prices-dataset.\nKonstantinova, Anastasia, et al. “Perceived Benefits and Costs of Owning a Pet in a Megapolis: An Ecosystem Services Perspective.” MDPI, 24 Sept. 2021, www.mdpi.com/2071-1050/13/19/10596.\nRathish, Devarajan, et al. “Household Preferences for Pet Keeping: Findings from a Rural District of Sri Lanka.” PLOS ONE, 22 Nov. 2022, journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0277108."
+  },
+  {
+    "objectID": "SIBDS.html",
+    "href": "SIBDS.html",
+    "title": "embedpdf Example",
+    "section": "",
+    "text": "Download PDF file."
   }
 ]

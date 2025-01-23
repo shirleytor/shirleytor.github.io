@@ -6,6 +6,6 @@ Hello there! Welcome to my website!
 
 I'm Shirley Toribio, an aspiring statistician and data scientist. I completed my Bachelor of Arts in Mathematics, with a concentration in Statistics, in December 2024. This website displays some of my past work.
 
-![Art by me](art.png)
+![quarto add jmgirard/embedpdfArt by me](art.png)
 
 The github repository hosting this website can be found [here](https://github.com/shirleytor/shirleytor.github.io).

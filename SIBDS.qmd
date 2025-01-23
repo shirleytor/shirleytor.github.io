@@ -1,0 +1,7 @@
+---
+title: "embedpdf Example"
+resources: 
+  -sibds_poster.pdf
+---
+
+`{{< pdf sibds_poster.pdf >}}`
