@@ -1,5 +1,5 @@
 ---
-title: "Summer Institure in Biostatistics and Data Science Research"
+title: "Summer Institute in Biostatistics and Data Science Research"
 resources: 
   -sibds_poster.pdf
 ---

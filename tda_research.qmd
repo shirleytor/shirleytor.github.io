@@ -1,0 +1,7 @@
+---
+title: "Kenneth Cooke Fellowship Research"
+resources: 
+  -Ken_Cooke_Fellowship--.pdf
+---
+
+{{< pdf Ken_Cooke_Fellowship--.pdf >}}

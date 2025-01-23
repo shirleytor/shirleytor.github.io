@@ -24,6 +24,7 @@ website:
       - text: "Past Research"
         menu: 
           - SIBDS.qmd
+          - tda_research.qmd
       - Presentation.qmd
 format:
   html:
