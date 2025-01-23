@@ -8,7 +8,7 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: About
       - text: "Data Visualizations"
         menu: 
           - data_viz.qmd
@@ -25,7 +25,6 @@ website:
         menu: 
           - SIBDS.qmd
           - tda_research.qmd
-      - Presentation.qmd
 format:
   html:
     theme: cosmo
