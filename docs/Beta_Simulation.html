@@ -154,7 +154,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-visualizations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -216,10 +216,6 @@ window.Quarto = {
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./Presentation.html"> 
-<span class="menu-text">Presentation</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -339,16 +335,16 @@ window.Quarto = {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     n PI_percentage     lower     upper     cover alpha beta mean_in_interval
-1   59          0.95 0.3900841 0.5960407 0.9824005    67   67             TRUE
-2  285          0.95 0.2511328 0.7562218 0.9539120     7    7             TRUE
-3  290          0.95 0.4316878 0.5683384 0.9640922   117  117             TRUE
-4  265          0.95 0.3581912 0.6461785 0.9614755    25   25             TRUE
-5  442          0.95 0.4331669 0.5604021 0.9479443   117  117             TRUE
-6   44          0.95 0.4415080 0.5541817 0.9626715   171  171             TRUE
-7  154          0.95 0.4295536 0.5625095 0.9605554   121  121             TRUE
-8  342          0.95 0.4494578 0.5508355 0.9562184   197  197             TRUE
-9  314          0.95 0.4353803 0.5628191 0.9583003   127  127             TRUE
-10 150          0.95 0.3527974 0.6659731 0.9599464    21   21             TRUE</code></pre>
+1  456          0.95 0.4351501 0.5647684 0.9533053   117  117             TRUE
+2  136          0.95 0.4423668 0.5609925 0.9699839   167  167             TRUE
+3  274          0.95 0.4155896 0.5875906 0.9437346    61   61             TRUE
+4  182          0.95 0.4327099 0.5683226 0.9657378   121  121             TRUE
+5  432          0.95 0.4392460 0.5603486 0.9600007   143  143             TRUE
+6  128          0.95 0.4412504 0.5592070 0.9739499   177  177             TRUE
+7  359          0.95 0.4191253 0.5767552 0.9405113    71   71             TRUE
+8  479          0.95 0.2297765 0.7638826 0.9668517     7    7             TRUE
+9   91          0.95 0.3906936 0.6013691 0.9386560    39   39             TRUE
+10  86          0.95 0.4039962 0.6199326 0.9512507    43   43             TRUE</code></pre>
 </div>
 </div>
 <p>This is a random sample of rows from the actual dataset, which has 48902 rows and 8 columns. Each row corresponds to a simulated random sample of size n from a beta distribution with parameters alpha and beta. For each random sample, a normal prediction interval was generated with bounds “lower” and “upper”. “PI_percentage” refers to the intended coverage probability and “cover” refers to the actual coverage probability of said prediction interval over the beta distribution the data was generated from. “mean_in_interval” is a binary variable that states if the prediction interval covered the mean of the distribution.</p>
