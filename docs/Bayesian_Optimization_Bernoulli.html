@@ -8,7 +8,7 @@
 
 <meta name="author" content="Shirley Toribio">
 
-<title>shirleytor.github.io - Bayesian Optimization with Bernoulli Data</title>
+<title>Shirley Toribio - Bayesian Optimization with Bernoulli Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,10 +70,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -143,7 +145,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">shirleytor.github.io</span>
+    <span class="navbar-title">Shirley Toribio</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -151,16 +153,12 @@ window.Quarto = {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-visualizations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Data Visualizations</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-visualizations">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-visualizations">    
         <li>
     <a class="dropdown-item" href="./data_viz.html">
  <span class="dropdown-text">World Fairs and CO2 Emissions</span></a>
@@ -179,7 +177,7 @@ window.Quarto = {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Data Analysis</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-analysis">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-analysis">    
         <li>
     <a class="dropdown-item" href="./Pets_SriLanka.html">
  <span class="dropdown-text">Pet Ownership in Sri Lanka</span></a>
@@ -190,7 +188,7 @@ window.Quarto = {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simulations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Simulations</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-simulations">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-simulations">    
         <li>
     <a class="dropdown-item" href="./Beta_Simulation.html">
  <span class="dropdown-text">Using Normal Prediction Intervals on Symmetric Beta-distributed data</span></a>
@@ -205,7 +203,7 @@ window.Quarto = {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-past-research" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Past Research</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-past-research">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-past-research">    
         <li>
     <a class="dropdown-item" href="./SIBDS.html">
  <span class="dropdown-text">Summer Institute in Biostatistics and Data Science Research</span></a>
@@ -219,6 +217,7 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -340,9 +339,9 @@ window.Quarto = {
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(TS_mean_parameters, TS_standard_deviation, actual_parameters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  TS_mean_parameters TS_standard_deviation actual_parameters
-1          0.7767256            0.04527662              0.81
-2          0.4221042            0.13301764              0.49
-3          0.3611869            0.11051629              0.37</code></pre>
+1          0.7978102            0.04149533              0.81
+2          0.3336988            0.11003373              0.49
+3          0.3045711            0.09347527              0.37</code></pre>
 </div>
 </div>
 <p>I used Thomas Sampling 100 times, with each time involving 100 iterations. “TS_parameters” displays the means of all the values most likely to be a specific parameter. Each of these values was determined by both the posteriors produced at the 100th iteration of every Thomas sample and the squared error loss function. “TS_standard_deviation” displays the sample standard deviation of all these values. The standard deviations would most likely have lower absolute values if informative priors had been used. They were quite large for estimations of <span class="math inline">\(p = .49\)</span> and <span class="math inline">\(p=.37\)</span>, which would be problematic if only one Thomas Sample with <span class="math inline">\(100\)</span> observations had been used. Thomas Sampling at this sample size might result in more stable estimates with informative priors.</p>
@@ -375,6 +374,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
