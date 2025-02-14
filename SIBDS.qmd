@@ -3,6 +3,7 @@ title: "Summer Institute in Biostatistics and Data Science Research"
 resources: 
   -sibds_poster.pdf
 ---
+
 During the summer of 2024, I participated in the Summer Institute in Biostatistics and Data Science Research (SIBDS) at Columbia University's Mailman School of Public Health. I performed research alongside Hunter Farnham, another participant in this program, and was guided by Dr. Alan Cohen and graduate student Christine Kuryla. The poster below describes the results of the research we performed.
 
 {{< pdf sibds_poster.pdf width=1000 height=600 >}}

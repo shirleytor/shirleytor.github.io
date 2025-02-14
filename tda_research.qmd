@@ -3,6 +3,7 @@ title: "Kenneth Cooke Fellowship Research"
 resources: 
   -Ken_Cooke_Fellowship--.pdf
 ---
+
 During the summer of 2023, I assisted Professor Chandler in performing research on Topological Data Analysis under the Kenneth Cooke Fellowship. The results of said research are described in the document below.
 
 {{< pdf Ken_Cooke_Fellowship--.pdf width=1000 height=1000 >}}
