@@ -1,0 +1,51 @@
+---
+title: "Social Determinants of Cancer Death"
+author: "Shirley Toribio"
+format: html
+editor: visual
+---
+
+# Introduction
+
+Health is largely thought of in terms of its biological components, since, for most people, health and deviations from it conjure images of immune response, organ function, and other such bodily based concepts. This is especially true for diseases such as cancer which are almost exclusively thought of in biological terms by the general population; however, it has been known for quite some time within the field of public health that biology does not encompass the entirety of many diseases and their severity. There are many diseases for which social circumstances determine risk of mortality to such a significant degree that social interventions are thought to be a means of decreasing risk (Wender). In cancer specifically, social determinants of health play a significant role in determining the risk of death (Pinheiro). 
+
+Narrowing down these social determinants of health could allow for the implementation of more targeted and cost-effective social interventions that decrease mortality in cancer patients. For this reason, this analysis asks the following question: which social determinants of health are significant enough to cohesively model mortality rates in cancer patients? This will be done by developing a model that conveys the relationship from 2011-2016 between cancer death rates in different US counties and measures related to their differing social circumstances.
+
+# Methods
+
+The [data](https://www.kaggle.com/datasets/varunraskar/cancer-regression) itself was compiled and joined together from clinicaltrials.gov, cancer.gov, and census.gov. It consists of 34 variables, 32 of which were considered as possible explanatory variables and 1, the cancer death rate per county, which was used as the responsive variable. The variables excluded from the analysis were the county variable, which names the United States county each entry of data pertains to, avgAnnCount, avgDeathsPerYear, popEst2015, medianAge, medianAgeFemale, medianAgeMale, binnedInc, studyPerCap and incidenceRate. Since county name is an identifier variable rather than a social variable, I felt it appropriate to exclude it from the analysis. All of these variables were not directly related to social circumstances. Predictably, these were positively correlated to the rate of cancer mortality and revealed nothing insightful about possible interventions. All the variables included in the analysis are continuous numeric variable. There are 591 data points, making this dataset’s sample size very well suited for analysis. Since the data was compiled from government sources, the sampling methods used most likely ensure every observation is independent of each other, which meets one important assumption of regression; however, since the data per county was compiled from different sources, it is possible that slight differences in how each source obtained its data mean that different variables do not correspond perfectly to each other. For instance, without clear insight into how each source defined specific counties, it might be the case that different variables collected data on differently defined counties. In addition, the population estimate for each county is from 2015, while the dataset overall contains data from 2011-2016. Despite these small discrepancies, both the standardization of methods that government agencies tend to implement across all their studies and unlikelihood of any data being extremely different from year to year means the data should be an approximate representation of each county from 2011-2016, thus making it useful for inference about the relationship between US cancer mortality and social factors in this time period.
+
+The code used to clean and organize the original dataset is shown below:
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(janitor)
+library(glmnet)
+```
+
+```{r}
+cancer <- read.csv("~/Stats Work/Data Science HW/shirleytor.github.io/cancer_reg.csv") %>%
+  clean_names() %>%
+  select(-avg_ann_count,-incidence_rate, -pop_est2015, -study_per_cap, -binned_inc, -median_age, -avg_deaths_per_year, -median_age_male, -median_age_female, -geography) %>%
+  drop_na()
+
+```
+
+# Data Analysis
+
+```{r}
+#xs <- cancer %>%
+ # select(-target_death_rate) %>%
+ # as.matrix()
+#for (i in 1:ncol(xs)) {
+ # for (j in i:(ncol(xs) + 1)) {
+ #   xs <- cbind(xs,xs[,i]*xs[,j])
+ # }
+#}
+#y <- cancer %>%
+#  select(target_death_rate)
+#cv1 <- cv.glmnet(xs, y, relax=TRUE)
+#fit.lasso <- glmnet(xs, y, lambda=cv1$relaxed$lambda.1se, relax=TRUE)
+#fit.lasso
+```

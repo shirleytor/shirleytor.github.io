@@ -8,7 +8,7 @@
 
 <meta name="author" content="Shirley Toribio">
 
-<title>shirleytor.github.io - World Fairs and CO2 Emissions</title>
+<title>shirleytor.github.io - Social Determinants of Cancer Death</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,73 +21,266 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="nav-fixed">
 
-
-<header id="title-block-header">
-<h1 class="title">World Fairs and CO2 Emissions</h1>
-<p class="author">Shirley Toribio</p>
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">shirleytor.github.io</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-visualizations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Visualizations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-visualizations">    
+        <li>
+    <a class="dropdown-item" href="./data_viz.html">
+ <span class="dropdown-text">World Fairs and CO2 Emissions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Netflix_Analysis.html">
+ <span class="dropdown-text">Netflix</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./SQL_Proj.html">
+ <span class="dropdown-text">Wideband Acoustic Immittance Data Visualization</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Analysis</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-analysis">    
+        <li>
+    <a class="dropdown-item" href="./Pets_SriLanka.html">
+ <span class="dropdown-text">Pet Ownership in Sri Lanka</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simulations" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Simulations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simulations">    
+        <li>
+    <a class="dropdown-item" href="./Beta_Simulation.html">
+ <span class="dropdown-text">Using Normal Prediction Intervals on Symmetric Beta-distributed data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Bayesian_Optimization_Bernoulli.html">
+ <span class="dropdown-text">Bayesian Optimization with Bernoulli Data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-past-research" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Past Research</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-past-research">    
+        <li>
+    <a class="dropdown-item" href="./SIBDS.html">
+ <span class="dropdown-text">Summer Institute in Biostatistics and Data Science Research</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tda_research.html">
+ <span class="dropdown-text">Kenneth Cooke Fellowship Research</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
-
-<nav id="TOC" role="doc-toc">
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#analyzing-data-on-world-fairs-from-1855-to-2022" id="toc-analyzing-data-on-world-fairs-from-1855-to-2022">Analyzing data on world fairs from 1855 to 2022</a></li>
-  <li><a href="#total-carbon-dioxide-emissions-from-major-natural-resource-companies" id="toc-total-carbon-dioxide-emissions-from-major-natural-resource-companies">Total carbon dioxide emissions from major natural resource companies</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">Data Analysis</a></li>
   </ul>
 </nav>
-<h2 id="analyzing-data-on-world-fairs-from-1855-to-2022" class="anchored">Analyzing data on world fairs from 1855 to 2022</h2>
-<p>This analysis looks at world fairs. According to Wikipedia,</p>
-<blockquote>
-<p><em>a world’s fair, also known as a universal exhibition or an expo, is a large global exhibition designed to showcase the achievements of nations. These exhibitions vary in character and are held in different parts of the world at a specific site for a period of time, typically between three and six months.</em></p>
-</blockquote>
-<p>Due to various factors, however, it is possible that world fairs might not be as representative of nations worldwide as their description and name would suggest. Ideally, as many nations as possible should be included in a world fair in order for it to be truly representative. As such, I track the number of countries that have attended world fairs from 1851 to 2021 to see how world fairs have evolved in terms of country representation.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" alt="A scatter plot titled number of countries attending world fair based on year. Each point represents a specific world fair. The x-axis is year that fair started and the y-axis is number of countries attending. There is a line of best fit that trends upwards as year increases." width="672"></p>
-</figure>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Social Determinants of Cancer Death</h1>
 </div>
-</div>
-</div>
-<p>Based on the upward trend of the line of best fit, world fairs seem to have become more inclusive of countries as time has gone by. This trend towards increased inclusivity of countries seems to be especially present from 1975 to 2021. Modern world fair thus seem more representative of countries worldwide than world fairs of the past.</p>
-<p>Data source <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-08-13">here</a>.</p>
-<h2 id="total-carbon-dioxide-emissions-from-major-natural-resource-companies" class="anchored">Total carbon dioxide emissions from major natural resource companies</h2>
-<p>This analysis looks at emissions of carbon dioxide from major natural resource companies. The dataset used for this analysis originates from a <a href="https://carbonmajors.org">Carbon Majors</a> <a href="https://carbonmajors.org/Downloads">database</a>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img src="data_viz_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" alt="A line plot titled total emissions of co2 based on source. The x-axis is year and the y-axis is total emissions of co2 in million tonnes. There are nine lines on the plot and each line represents a different commodity. The nine commodoties represented are anthacite coal, bitumunous coal, cement, lignite coal, metallurgical coal, natural gas, oil, sub-bituminuous coal, and thermal coal. After the year 1950, the lines for oil, bituminuous coal, and natural gas are all higher than the other lines. After 1950, the line for oil is the highest, the line for bituminous coal is the second highest, and the line for natural gas is the third highest." width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. Major natural resource companies should thus look into reducing their production of these commodities and shifting towards production of other commodoties in order to reduce their carbon dioxide emissions.</p>
-<p>Data source <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21">here</a>.</p>
 
 
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shirley Toribio </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Health is largely thought of in terms of its biological components, since, for most people, health and deviations from it conjure images of immune response, organ function, and other such bodily based concepts. This is especially true for diseases such as cancer which are almost exclusively thought of in biological terms by the general population; however, it has been known for quite some time within the field of public health that biology does not encompass the entirety of many diseases and their severity. There are many diseases for which social circumstances determine risk of mortality to such a significant degree that social interventions are thought to be a means of decreasing risk (Wender). In cancer specifically, social determinants of health play a significant role in determining the risk of death (Pinheiro).&nbsp;</p>
+<p>Narrowing down these social determinants of health could allow for the implementation of more targeted and cost-effective social interventions that decrease mortality in cancer patients. For this reason, this analysis asks the following question: which social determinants of health are significant enough to cohesively model mortality rates in cancer patients? This will be done by developing a model that conveys the relationship from 2011-2016 between cancer death rates in different US counties and measures related to their differing social circumstances.</p>
+</section>
+<section id="methods" class="level1">
+<h1>Methods</h1>
+<p>The <a href="https://www.kaggle.com/datasets/varunraskar/cancer-regression">data</a> itself was compiled and joined together from clinicaltrials.gov, cancer.gov, and census.gov. It consists of 34 variables, 32 of which were considered as possible explanatory variables and 1, the cancer death rate per county, which was used as the responsive variable. The&nbsp;variables excluded from the analysis were the county variable, which names the United States county each entry of data pertains to, avgAnnCount, avgDeathsPerYear, popEst2015, medianAge, medianAgeFemale, medianAgeMale, binnedInc, studyPerCap and incidenceRate. Since county name is an identifier variable rather than a social variable, I felt it appropriate to exclude it from the analysis. All of these variables were not directly related to social circumstances. Predictably, these were positively correlated to the rate of cancer mortality and revealed nothing insightful about possible interventions.&nbsp;All the variables included in the analysis are continuous numeric variable. There are 591 data points, making this dataset’s sample size very well suited for analysis. Since the data was compiled from government sources, the sampling methods used most likely ensure every observation is independent of each other, which meets one important assumption of regression; however, since the data per county was compiled from different sources, it is possible that slight differences in how each source obtained its data mean that different variables do not correspond perfectly to each other. For instance, without clear insight into how each source defined specific counties, it might be the case that different variables collected data on differently defined counties. In addition, the population estimate for each county is from 2015, while the dataset overall contains data from 2011-2016. Despite these small discrepancies, both the standardization of methods that government agencies tend to implement across all their studies and unlikelihood of any data being extremely different from year to year means the data should be an approximate representation of each county from 2011-2016, thus making it useful for inference about the relationship between US cancer mortality and social factors in this time period.</p>
+<p>The code used to clean and organize the original dataset is shown below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cancer <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Stats Work/Data Science HW/shirleytor.github.io/cancer_reg.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>avg_ann_count,<span class="sc">-</span>incidence_rate, <span class="sc">-</span>pop_est2015, <span class="sc">-</span>study_per_cap, <span class="sc">-</span>binned_inc, <span class="sc">-</span>median_age, <span class="sc">-</span>avg_deaths_per_year, <span class="sc">-</span>median_age_male, <span class="sc">-</span>median_age_female, <span class="sc">-</span>geography) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-analysis" class="level1">
+<h1>Data Analysis</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#xs &lt;- cancer %&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># select(-target_death_rate) %&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="co"># as.matrix()</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#for (i in 1:ncol(xs)) {</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="co"># for (j in i:(ncol(xs) + 1)) {</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="co">#   xs &lt;- cbind(xs,xs[,i]*xs[,j])</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># }</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#y &lt;- cancer %&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(target_death_rate)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#cv1 &lt;- cv.glmnet(xs, y, relax=TRUE)</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#fit.lasso &lt;- glmnet(xs, y, lambda=cv1$relaxed$lambda.1se, relax=TRUE)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#fit.lasso</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -108,10 +301,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-  tabsets.forEach(function(tabset) {
-    const tabby = new Tabby('#' + tabset.id);
-  });
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -200,7 +389,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       },
       interactive: true,
       interactiveBorder: 10,
-      theme: 'light-border',
+      theme: 'quarto',
       placement: 'bottom-start',
     };
     if (contentFn) {
@@ -501,6 +690,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+</div> <!-- /content -->
 
 
 

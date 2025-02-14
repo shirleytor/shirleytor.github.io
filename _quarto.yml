@@ -4,9 +4,9 @@ project:
   resources: pdfjs
 
 website:
-  title: "shirleytor.github.io"
+  title: "Shirley Toribio"
   navbar:
-    left:
+    right:
       - href: index.qmd
         text: About
       - text: "Data Visualizations"
@@ -27,7 +27,7 @@ website:
           - tda_research.qmd
 format:
   html:
-    theme: cosmo
+    theme: journal
     css: styles.css
     toc: true
 
