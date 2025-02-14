@@ -7,8 +7,6 @@ website:
   title: "Shirley Toribio"
   navbar:
     right:
-      - href: index.qmd
-        text: About
       - text: "Data Visualizations"
         menu: 
           - data_viz.qmd
@@ -27,7 +25,9 @@ website:
           - tda_research.qmd
 format:
   html:
-    theme: journal
+    theme:
+      light: journal
+      dark: darkly
     css: styles.css
     toc: true
 
