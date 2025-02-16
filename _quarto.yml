@@ -1,7 +1,8 @@
 project:
   type: website
   output-dir: docs
-  resources: pdfjs
+  resources: 
+    -pdfjs
 
 website:
   title: "Shirley Toribio"

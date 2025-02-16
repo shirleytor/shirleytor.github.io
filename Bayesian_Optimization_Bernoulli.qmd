@@ -1,6 +1,6 @@
 ---
 title: "Bayesian Optimization with Bernoulli Data"
-author: "Shirley Toribio"
+authl;or: "Shirley Toribio"
 format: html
 editor: visual
 ---
