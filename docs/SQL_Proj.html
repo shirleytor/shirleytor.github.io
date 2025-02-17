@@ -4603,21 +4603,6 @@ shinyApp(ui, server)
 "31","Female","Unknown","Unknown","Aithal_2013",6000,0.713923171643288
 "32","Female","Unknown","Unknown","Aithal_2013",8000,0.633678766508256
 </code></pre>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> freq, <span class="at">y =</span> mean_absorbance, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean absorbance from babies of different sexes"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SQL_Proj_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" alt="A line plot titled mean absorbance from babies of different sexes. Each line represents data of  babies of a specific sex. There are two lines representing male babies and female babies. The x-axis is frequency and the y-axis is mean absorbance. The line representing male babies tends to be above the line representing female babies." width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 <p>Using SQL queries, I filtered through and sorted data in a manner that allowed me to compare absorbance measurements across babies of different sexes with data from Aithal(<a href="">2013</a>)and copy figure 1 of Voss(2019). I did this with 2 SQL queries and joined different tables from the same database to produce both graphs. Following each query, I used ggplot to plot mean absorbance measurements alongside frequency.</p>
 <section id="references" class="level3">
 <h3 class="anchored" data-anchor-id="references">References</h3>
