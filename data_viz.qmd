@@ -28,21 +28,6 @@ fair_data <- read_csv("worlds_fairs.csv") %>%
   ))
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#| fig.alt: "A scatter plot titled number of countries attending world fair based on year. Each point represents a specific world fair. The x-axis is year that fair started and the y-axis is number of countries attending. There is a line of best fit that trends upwards as year increases."
-
-ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
-  geom_point(color = "purple") +
-  geom_smooth(se=FALSE,color="blue") +
-    labs(
-    x = "Year that fair started",
-    y = "Number of countries attending",
-    title = "Number of countries attending world fair based on year"
-  ) +
-  theme_minimal()
-
-```
-
 ```{shinylive-r}
 #| fig.alt: "A scatter plot titled number of countries attending world fair based on year. Each point represents a specific world fair. The x-axis is year that fair started and the y-axis is number of countries attending. There is a line of best fit that trends upwards as year increases."
 #| standalone: true
