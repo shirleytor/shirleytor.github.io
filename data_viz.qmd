@@ -41,7 +41,48 @@ ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
   ) +
   theme_minimal()
 
+```
 
+```{shinylive-r}
+#| fig.alt: "A scatter plot titled number of countries attending world fair based on year. Each point represents a specific world fair. The x-axis is year that fair started and the y-axis is number of countries attending. There is a line of best fit that trends upwards as year increases."
+#| standalone: true
+#| viewerHeight: 600
+library(shiny)
+library(bslib)
+library(tidyverse)
+
+fair_data <- read_csv("worlds_fairs.csv") %>%
+  mutate(fair_length = case_when(
+    start_year == end_year ~ end_month - start_month,
+    start_year != end_year ~ (12-start_month) + end_month
+  ))
+
+ui <- page_sidebar(theme = theme,
+                   sidebar = sidebar(
+                     sliderInput("rng", "X-Value Range", value = c(1900, 1910), min = min(fair_data$start_year), max = max(fair_data$start_year), sep="")
+                   ),
+                   mainPanel(plotOutput("plot", width=600))
+)
+
+server <- function(input, output, session){
+  output$plot <- renderPlot({
+    ggplot(fair_data, aes(x = start_year, y = attending_countries)) +
+      geom_point(color = "purple") +
+      geom_smooth(se=FALSE,color="blue") +
+        labs(
+          x = "Year that fair started",
+          y = "Number of countries attending",
+          title = "Number of countries attending world fair based on year"
+        ) +
+      theme_minimal() +
+      xlim(input$rng[1],input$rng[2])
+  })
+}
+
+shinyApp(ui, server)
+
+## file: worlds_fairs.csv
+{{< include worlds_fairs.csv >}}
 ```
 
 Based on the upward trend of the line of best fit, world fairs seem to have become more inclusive of countries as time has gone by. This trend towards increased inclusivity of countries seems to be especially present from 1975 to 2021. Modern world fair thus seem more representative of countries worldwide than world fairs of the past.
@@ -50,40 +91,11 @@ Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/da
 
 ## Total carbon dioxide emissions from major natural resource companies
 
-This analysis looks at emissions of carbon dioxide from major natural resource companies. The dataset used for this analysis originates from a [Carbon Majors](https://carbonmajors.org) [database](https://carbonmajors.org/Downloads).
+This interactive graph looks at emissions of carbon dioxide from major natural resource companies. The dataset used for this analysis originates from a [Carbon Majors](https://carbonmajors.org) [database](https://carbonmajors.org/Downloads).
 
-```{r, include=FALSE, warning=FALSE, message=FALSE}
-emissions_data <- read_csv("emissions.csv") %>% 
-  janitor::clean_names() %>%
-  group_by(commodity, year) %>%
-  summarize(total_emissions = sum(total_emissions_mt_co2e))
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#| fig.alt: "A line plot titled total emissions of co2 based on source. The x-axis is year and the y-axis is total emissions of co2 in million tonnes. There are nine lines on the plot and each line represents a different commodity. The nine commodoties represented are anthacite coal, bitumunous coal, cement, lignite coal, metallurgical coal, natural gas, oil, sub-bituminuous coal, and thermal coal. After the year 1950, the lines for oil, bituminuous coal, and natural gas are all higher than the other lines. After 1950, the line for oil is the highest, the line for bituminous coal is the second highest, and the line for natural gas is the third highest."
-
-ggplot(emissions_data, aes(x = year, y = total_emissions)) +
-  geom_smooth(aes(color = commodity),se=FALSE) +
-  theme_minimal() +
-    labs(
-    x = "Year",
-    y = "Total emissions of co2 in million tonnes ",
-    title = "Total emissions of co2 based on source"
-  ) 
-  
-
-
-```
-
-Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. Major natural resource companies should thus look into reducing their production of these commodities and shifting towards production of other commodoties in order to reduce their carbon dioxide emissions.
-
-Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21).
-
-```{r}
-commodities <- unique(emissions_data$commodity)
-```
 
 ```{shinylive-r}
+#| fig.alt: "A line plot titled total emissions of co2 based on source. The x-axis is year and the y-axis is total emissions of co2 in million tonnes. There are nine lines on the plot and each line represents a different commodity. The nine commodoties represented are anthacite coal, bitumunous coal, cement, lignite coal, metallurgical coal, natural gas, oil, sub-bituminuous coal, and thermal coal. After the year 1950, the lines for oil, bituminuous coal, and natural gas are all higher than the other lines. After 1950, the line for oil is the highest, the line for bituminous coal is the second highest, and the line for natural gas is the third highest."
 #| standalone: true
 #| viewerHeight: 600
 library(shiny)
@@ -101,7 +113,7 @@ ui <- page_sidebar(theme = theme,
                    sidebar = sidebar(
                      checkboxGroupInput("commodit", "Choose which commodities should be represented in the plot", commodities)
                    ),
-                   mainPanel(plotOutput("plot"))
+                   mainPanel(plotOutput("plot", width=600))
 )
 
 server <- function(input, output, session){
@@ -120,60 +132,11 @@ server <- function(input, output, session){
 }
 
 shinyApp(ui, server)
+
+## file: emissions.csv
+{{< include emissions.csv >}}
 ```
 
-```{shinylive-r}
-#| standalone: true
-#| viewerHeight: 600
-library(shiny)
-library(bslib)
+Based on this graph, the production of oil, natural gas, and coal seems to be mostly responsible for the amount of carbon dioxide emitted by major natural resource companies. Major natural resource companies should thus look into reducing their production of these commodities and shifting towards production of other commodoties in order to reduce their carbon dioxide emissions.
 
-# Define UI for app that draws a histogram ----
-ui <- page_sidebar(
-  sidebar = sidebar(open = "open",
-    numericInput("n", "Sample count", 100),
-    checkboxInput("pause", "Pause", FALSE),
-  ),
-  plotOutput("plot", width=1100)
-)
-
-server <- function(input, output, session) {
-  data <- reactive({
-    input$resample
-    if (!isTRUE(input$pause)) {
-      invalidateLater(1000)
-    }
-    rnorm(input$n)
-  })
-   output$plot <- renderPlot({
-    hist(data(),
-      breaks = 40,
-      xlim = c(-2, 2),
-      ylim = c(0, 1),
-      lty = "blank",
-      xlab = "value",
-      freq = FALSE,
-      main = ""
-    )
-    
-    x <- seq(from = -2, to = 2, length.out = 500)
-    y <- dnorm(x)
-    lines(x, y, lwd=1.5)
-    
-    lwd <- 5
-    abline(v=0, col="red", lwd=lwd, lty=2)
-    abline(v=mean(data()), col="blue", lwd=lwd, lty=1)
-
-    legend(legend = c("Normal", "Mean", "Sample mean"),
-      col = c("black", "red", "blue"),
-      lty = c(1, 2, 1),
-      lwd = c(1, lwd, lwd),
-      x = 1,
-      y = 0.9
-    )
-  }, res=140)
-}
-
-# Create Shiny app ----
-shinyApp(ui = ui, server = server)
-```
+Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-05-21).
