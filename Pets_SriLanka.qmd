@@ -91,7 +91,7 @@ combination <-rbind(Gampaha11,Gampaha12,Gampaha21,Gampaha22,Gampaha31,Gampaha32,
   ))
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 inferior_fit <- aov(Price_in_Rupees~Animal_Type + Location, data=combination)
 anova(inferior_fit)
 TukeyHSD(inferior_fit,conf.level=.975,which="Animal_Type")
@@ -107,7 +107,7 @@ Cost_in_Rupees <- combination$Price_in_Rupees
 
 ## Data Analysis
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 inferior_fit <- aov(Price_in_Rupees~Animal_Type + Location, data=combination)
 anova(inferior_fit)
 TukeyHSD(inferior_fit,conf.level=.975,which="Animal_Type")
@@ -136,6 +136,10 @@ plot(fit,which = 1)
 
 As this figure shows, the variances within each group resemble each other significantly more when prices are interpreted in terms of their square root. Since homoscedasticity is necessary for the F-test, the rest of this analysis will interpret pet prices in terms of their square roots instead of the prices themselves. By making sure that homoscedasticity is met, the potential effects of pet type and location on pet prices can then be seen.
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+fit<- aov(sqrt(Price_in_Rupees)~Animal_Type + Location, data=combination)
+anova(fit)
+```
 The purpose of the ANOVA analysis was to see if either pet type or location individually had an effect on the prices of pets. For this reason, two F-tests were conducted for each possible variable. Each variable was given an alpha value of .025 in order to maintain a family-wise confidence level of 95%. The first F-test consists of mean square pet type divided by mean square error, which is the variance of the mean square-root prices in terms of pet type only for all observations divided by the variance of all residuals given the entire model is used to find the fitted value. This is a measure of the amount of variance in the full model explained by pet type being a factor divided by the variance of the residuals given the full model. If pet type is not a significant factor, the numerator of this value should be approximately equal to one variance, meaning the resulting F-score should be approximately one. The null hypothesis for this test is that pet type is not a significant factor, meaning there would be close to no difference in the mean square root prices per pet type. The p-value for the F-test corresponding to pet-type, however, was lower than .025, meaning this null hypothesis is most likely not true and pet type is a significant factor in this model. A second F-test was also performed to test whether a sale occurring in Gampaha, Kandy, or Colombo influenced square root pet prices; since the test resulted in a p-value greater than .025, the null hypothesis that residing in one of these three cities does not have a significant effect on square root pet prices cannot be dismissed.
 
 ```{r, message=FALSE, warning=FALSE}

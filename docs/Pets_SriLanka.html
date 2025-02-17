@@ -308,130 +308,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    Location <span class="sc">==</span> <span class="st">" Kadawatha,  Gampaha"</span> <span class="sc">~</span> <span class="st">"Gampaha"</span></span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>inferior_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Price_in_Rupees<span class="sc">~</span>Animal_Type <span class="sc">+</span> Location, <span class="at">data=</span>combination)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(inferior_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: Price_in_Rupees
-             Df     Sum Sq    Mean Sq F value    Pr(&gt;F)    
-Animal_Type   3 4.7523e+10 1.5841e+10  7.4750 0.0001368 ***
-Location      2 6.2369e+09 3.1184e+09  1.4715 0.2341891    
-Residuals   107 2.2676e+11 2.1192e+09                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(inferior_fit,<span class="at">conf.level=</span>.<span class="dv">975</span>,<span class="at">which=</span><span class="st">"Animal_Type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    97.5% family-wise confidence level
-
-Fit: aov(formula = Price_in_Rupees ~ Animal_Type + Location, data = combination)
-
-$Animal_Type
-               diff        lwr        upr     p adj
-Cat-Bird   16044.20 -20596.886  52685.291 0.5918521
-Dog-Bird   32166.67  -1969.075  66302.409 0.0390312
-Fish-Bird -22037.10 -56172.842  12098.642 0.2542078
-Dog-Cat    16122.46 -20518.625  52763.552 0.5879680
-Fish-Cat  -38081.30 -74722.391  -1440.214 0.0182015
-Fish-Dog  -54203.77 -88339.509 -20068.025 0.0000798</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="fu">sqrt</span>(Price_in_Rupees)<span class="sc">~</span>Animal_Type <span class="sc">+</span> Location, <span class="at">data=</span>combination)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: sqrt(Price_in_Rupees)
-             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-Animal_Type   3 605119  201706 29.8031 4.379e-14 ***
-Location      2  13783    6891  1.0182    0.3647    
-Residuals   107 724173    6768                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(fit,<span class="at">conf.level=</span>.<span class="dv">975</span>,<span class="at">which=</span><span class="st">"Animal_Type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    97.5% family-wise confidence level
-
-Fit: aov(formula = sqrt(Price_in_Rupees) ~ Animal_Type + Location, data = combination)
-
-$Animal_Type
-                diff        lwr        upr     p adj
-Cat-Bird    97.89168   32.41165  163.37170 0.0002247
-Dog-Bird   128.89603   67.89322  189.89884 0.0000001
-Fish-Bird  -50.00844 -111.01125   10.99436 0.0924279
-Dog-Cat     31.00435  -34.47568   96.48438 0.5272384
-Fish-Cat  -147.90012 -213.38015  -82.42009 0.0000000
-Fish-Dog  -178.90447 -239.90728 -117.90166 0.0000000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>City <span class="ot">&lt;-</span> combination<span class="sc">$</span>Location</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Animal_Type <span class="ot">&lt;-</span> combination<span class="sc">$</span>Animal_Type</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Cost_in_Rupees <span class="ot">&lt;-</span> combination<span class="sc">$</span>Price_in_Rupees</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="data-analysis">Data Analysis</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: Price_in_Rupees
-             Df     Sum Sq    Mean Sq F value    Pr(&gt;F)    
-Animal_Type   3 4.7523e+10 1.5841e+10  7.4750 0.0001368 ***
-Location      2 6.2369e+09 3.1184e+09  1.4715 0.2341891    
-Residuals   107 2.2676e+11 2.1192e+09                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    97.5% family-wise confidence level
-
-Fit: aov(formula = Price_in_Rupees ~ Animal_Type + Location, data = combination)
-
-$Animal_Type
-               diff        lwr        upr     p adj
-Cat-Bird   16044.20 -20596.886  52685.291 0.5918521
-Dog-Bird   32166.67  -1969.075  66302.409 0.0390312
-Fish-Bird -22037.10 -56172.842  12098.642 0.2542078
-Dog-Cat    16122.46 -20518.625  52763.552 0.5879680
-Fish-Cat  -38081.30 -74722.391  -1440.214 0.0182015
-Fish-Dog  -54203.77 -88339.509 -20068.025 0.0000798</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: sqrt(Price_in_Rupees)
-             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-Animal_Type   3 605119  201706 29.8031 4.379e-14 ***
-Location      2  13783    6891  1.0182    0.3647    
-Residuals   107 724173    6768                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    97.5% family-wise confidence level
-
-Fit: aov(formula = sqrt(Price_in_Rupees) ~ Animal_Type + Location, data = combination)
-
-$Animal_Type
-                diff        lwr        upr     p adj
-Cat-Bird    97.89168   32.41165  163.37170 0.0002247
-Dog-Bird   128.89603   67.89322  189.89884 0.0000001
-Fish-Bird  -50.00844 -111.01125   10.99436 0.0924279
-Dog-Cat     31.00435  -34.47568   96.48438 0.5272384
-Fish-Cat  -147.90012 -213.38015  -82.42009 0.0000000
-Fish-Dog  -178.90447 -239.90728 -117.90166 0.0000000</code></pre>
-</div>
-</div>
 <p>In order to perform the F test, homoscedasticity across all sample groups under a specific model is an assumption that needs to be met. In terms of this analysis, that means the variance in pet prices within each subgroup needs to be similar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>inferior_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Price_in_Rupees<span class="sc">~</span>Animal_Type <span class="sc">+</span> Location, <span class="at">data=</span>combination)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inferior_fit,<span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>inferior_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Price_in_Rupees<span class="sc">~</span>Animal_Type <span class="sc">+</span> Location, <span class="at">data=</span>combination)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inferior_fit,<span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -442,7 +325,7 @@ Fish-Dog  -178.90447 -239.90728 -117.90166 0.0000000</code></pre>
 </div>
 <p>Each group of points in this figure represents a specific subgroup of pet prices corresponding to a specific type of pet in a specific city. When the spread of points within each subgroup is compared to the spread of them in other subgroups, it is evident that different subgroups have different spreads, meaning they have different variances in pet price.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit,<span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit,<span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -452,13 +335,26 @@ Fish-Dog  -178.90447 -239.90728 -117.90166 0.0000000</code></pre>
 </div>
 </div>
 <p>As this figure shows, the variances within each group resemble each other significantly more when prices are interpreted in terms of their square root. Since homoscedasticity is necessary for the F-test, the rest of this analysis will interpret pet prices in terms of their square roots instead of the prices themselves. By making sure that homoscedasticity is met, the potential effects of pet type and location on pet prices can then be seen.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: sqrt(Price_in_Rupees)
+             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+Animal_Type   3 605119  201706 29.8031 4.379e-14 ***
+Location      2  13783    6891  1.0182    0.3647    
+Residuals   107 724173    6768                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
 <p>The purpose of the ANOVA analysis was to see if either pet type or location individually had an effect on the prices of pets. For this reason, two F-tests were conducted for each possible variable. Each variable was given an alpha value of .025 in order to maintain a family-wise confidence level of 95%. The first F-test consists of mean square pet type divided by mean square error, which is the variance of the mean square-root prices in terms of pet type only for all observations divided by the variance of all residuals given the entire model is used to find the fitted value. This is a measure of the amount of variance in the full model explained by pet type being a factor divided by the variance of the residuals given the full model. If pet type is not a significant factor, the numerator of this value should be approximately equal to one variance, meaning the resulting F-score should be approximately one. The null hypothesis for this test is that pet type is not a significant factor, meaning there would be close to no difference in the mean square root prices per pet type. The p-value for the F-test corresponding to pet-type, however, was lower than .025, meaning this null hypothesis is most likely not true and pet type is a significant factor in this model. A second F-test was also performed to test whether a sale occurring in Gampaha, Kandy, or Colombo influenced square root pet prices; since the test resulted in a p-value greater than .025, the null hypothesis that residing in one of these three cities does not have a significant effect on square root pet prices cannot be dismissed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(fit,<span class="at">conf.level=</span>.<span class="dv">975</span>,<span class="at">which=</span><span class="st">"Animal_Type"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(fit,<span class="at">conf.level=</span>.<span class="dv">975</span>,<span class="at">which=</span><span class="st">"Animal_Type"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Pets_SriLanka_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Pets_SriLanka_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
