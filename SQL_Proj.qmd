@@ -110,6 +110,62 @@ WHERE Subjects.Identifier = "Aithal_2013" AND Measurements.Identifier = "Aithal_
 GROUP BY ethnicity, race, sex, freq;
 ```
 
+```{r}
+# Code to convert SQL table to csv file that can be used in Shiny app
+df <- cat(NULL,file="df.csv")
+write.csv(table2, file="df.csv")
+```
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+library(shiny)
+library(bslib)
+library(tidyverse)
+
+table2 <- read_csv("df.csv") 
+options <- c("nothing","sex")
+
+ui <- page_sidebar(theme = theme,
+                   sidebar = sidebar(
+                     selectInput("option", "Compare mean absorbances of babies based on", options),
+                     sliderInput("rng", "frequency range", value = c(2000, 4000), min = min(table2$freq), max = max(table2$freq), sep="")
+                   ),
+                   mainPanel(plotOutput("plot", width=600))
+)
+
+server <- function(input, output, session){
+  output$plot <- renderPlot({
+    if (input$option == "nothing"){
+      #| fig.alt: "A line plot titled mean absorbance from babies. There is one line representing all babies. The x-axis is frequency and the y-axis is mean absorbance. "
+      table2 %>%
+        ggplot(aes(x = freq, y = mean_absorbance)) +
+        geom_point(color = "purple") +
+        geom_line(se = FALSE) +
+        labs(
+          title = "Mean absorbance from babies"
+        )  +
+      xlim(input$rng[1],input$rng[2])
+    } else if (input$option == "sex"){
+      #| fig.alt: "A line plot titled mean absorbance from babies of different sexes. Each line represents data of  babies of a specific sex. There are two lines representing male babies and female babies. The x-axis is frequency and the y-axis is mean absorbance. The line representing male babies tends to be above the line representing female babies."
+      table2 %>%
+        ggplot(aes(x = freq, y = mean_absorbance, color = sex)) +
+        geom_point() +
+        geom_line(se = FALSE) +
+        labs(
+          title = "Mean absorbance from babies of different sexes"
+        )  +
+      xlim(input$rng[1],input$rng[2])
+    }
+  })
+}
+
+shinyApp(ui, server)
+
+## file: df.csv
+{{< include df.csv >}}
+```
+
 ```{r, warning=FALSE, message=FALSE}
 #| fig.alt: "A line plot titled mean absorbance from babies of different sexes. Each line represents data of  babies of a specific sex. There are two lines representing male babies and female babies. The x-axis is frequency and the y-axis is mean absorbance. The line representing male babies tends to be above the line representing female babies."
 
@@ -120,6 +176,7 @@ table2 %>%
     title = "Mean absorbance from babies of different sexes"
   )
 ```
+
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 dbDisconnect(con_wai)
