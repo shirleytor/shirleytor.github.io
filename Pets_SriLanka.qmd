@@ -36,60 +36,40 @@ The data used for this analysis originates from Ikman.lk, a popular website for 
 Data cleaning that samples from city-pet categories with 5 or more observations is performed with the code below.
 
 ```{r, message=FALSE, warning=FALSE}
+
+
 more_than_100 = c() 
-for (each in unique){
+for (each in unique){ # Loop to see which cities have more than 100 observations
   if (nrow(dplyr::filter(data,Location==each)) > 1){
     more_than_100 = c(more_than_100,each)
   }
 }
 
 cities = c()
-for (each in more_than_100){
+for (each in more_than_100){ # Loop to see which cities have more than 5 observations per pet category
   if (nrow(dplyr::filter(data,Location==each, Animal_Type=="Dog")) > 5 & nrow(dplyr::filter(data,Location==each, Animal_Type=="Cat")) > 5 & nrow(dplyr::filter(data,Location==each, Animal_Type=="Fish")) > 5 & nrow(dplyr::filter(data,Location==each, Animal_Type=="Bird"))>5){
     cities = c(cities,each)
   }
 }
 
-Gampaha11 <- filter(data, Location==" Kadawatha,  Gampaha", Animal_Type=="Dog" )[1:5,]
-Gampaha21 <- filter(data, Location==" Kadawatha,  Gampaha", Animal_Type=="Cat" )[1:5,]
-Gampaha31 <- filter(data, Location==" Kadawatha,  Gampaha", Animal_Type=="Fish" )[1:5,]
-Gampaha41 <- filter(data, Location==" Kadawatha,  Gampaha", Animal_Type=="Bird" )[1:5,]
+sample_cities <- c(" Kotte,  Colombo"," Kolonnawa,  Colombo"," Katugastota,  Kandy"," Kandy City,  Kandy"," Kiribathgoda,  Gampaha"," Kadawatha,  Gampaha")
+animal_list <- c("Dog","Cat","Fish","Bird")
 
-Gampaha12 <- filter(data, Location ==" Kiribathgoda,  Gampaha", Animal_Type=="Dog" )[1:5,]
-Gampaha22 <- filter(data, Location==" Kiribathgoda,  Gampaha", Animal_Type=="Cat")[1:5,]
-Gampaha32 <- filter(data, Location==" Kiribathgoda,  Gampaha", Animal_Type=="Fish")[1:5,]
-Gampaha42 <- filter(data, Location==" Kiribathgoda,  Gampaha", Animal_Type=="Bird" )[1:5,]
+city_animal <- function(city, animal_list, df){ #Function to create dataframe of 5 dogs, 5 cats, 5 fish, and 5 birds being sold in a specific city
+  city_df <- map(animal_list, \(animal) head(filter(df, Location == city, Animal_Type == animal),5))%>%
+    list_rbind()
+  return(city_df)
+}
 
-Kandy11 <- filter(data, Location==" Kandy City,  Kandy", Animal_Type=="Dog" )[1:5,]
-Kandy21 <- filter(data, Location==" Kandy City,  Kandy", Animal_Type=="Cat" )[1:5,]
-Kandy31 <- filter(data, Location==" Kandy City,  Kandy", Animal_Type=="Fish" )[1:5,]
-Kandy41 <- filter(data, Location==" Kandy City,  Kandy", Animal_Type=="Bird" )[1:5,]
-
-Kandy12 <- filter(data, Location==" Katugastota,  Kandy", Animal_Type=="Dog" )[1:5,]
-Kandy22 <- filter(data, Location==" Katugastota,  Kandy", Animal_Type=="Cat" )[1:5,]
-Kandy32 <- filter(data, Location==" Katugastota,  Kandy", Animal_Type=="Fish" )[1:5,]
-Kandy42 <- filter(data, Location==" Katugastota,  Kandy", Animal_Type=="Bird" )[1:5,]
-
-Colombo11 <- filter(data, Location==" Kotte,  Colombo", Animal_Type=="Dog" )[1:5,]
-Colombo21 <- filter(data, Location==" Kotte,  Colombo", Animal_Type=="Cat" )[1:5,]
-Colombo31 <- filter(data, Location==" Kotte,  Colombo", Animal_Type=="Fish" )[1:5,]
-Colombo41 <- filter(data, Location==" Kotte,  Colombo", Animal_Type=="Bird" )[1:5,]
-
-Colombo12 <- filter(data, Location==" Kolonnawa,  Colombo", Animal_Type=="Dog" )[1:5,]
-Colombo22 <- filter(data, Location==" Kolonnawa,  Colombo", Animal_Type=="Cat"  )[1:5,]
-Colombo32 <- filter(data, Location==" Kolonnawa,  Colombo", Animal_Type=="Fish"  )[1:5,]
-Colombo42 <- filter(data, Location==" Kolonnawa,  Colombo", Animal_Type=="Bird"  )[1:5,]
-
-combination <-rbind(Gampaha11,Gampaha12,Gampaha21,Gampaha22,Gampaha31,Gampaha32,Gampaha41,Gampaha42,Kandy11,Kandy12,Kandy21,Kandy22,Kandy31,Kandy32,Kandy41,Kandy42,Colombo11,Colombo12,Colombo21,Colombo22,Colombo31,Colombo32,Colombo41,Colombo42) %>%
+combination <- map(sample_cities, \(city) city_animal(city, animal_list,data)) %>%
+  list_rbind() %>%
   mutate(Location = case_when(
-    Location == " Kotte,  Colombo" ~ "Colombo",
-    Location == " Kolonnawa,  Colombo" ~ "Colombo",
-    Location == " Katugastota,  Kandy" ~ "Kandy",
-    Location == " Kandy City,  Kandy" ~ "Kandy",
-    Location == " Kiribathgoda,  Gampaha" ~ "Gampaha",
-    Location == " Kadawatha,  Gampaha" ~ "Gampaha"
+    str_detect(Location,"Colombo") == TRUE ~ "Colombo",
+    str_detect(Location,"Kandy") == TRUE ~ "Kandy",
+    str_detect(Location,"Gampaha") == TRUE ~ "Gampaha"
   ))
 ```
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 inferior_fit <- aov(Price_in_Rupees~Animal_Type + Location, data=combination)
