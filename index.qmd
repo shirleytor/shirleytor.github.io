@@ -6,7 +6,7 @@ filters:
 
 Hello there! Welcome to my website!
 
-I'm Shirley Toribio, an aspiring statistician and data scientist. I attended Pomona College and completed my Bachelor of Arts in Mathematics, with a concentration in Statistics, in December 2024. This website displays some personal and professional projects of mine. Feel free to check them out!
+I'm Shirley Toribio. I attended Pomona College and completed my Bachelor of Arts in Mathematics, with a concentration in Statistics, in December 2024. This website displays some personal and professional projects of mine. Feel free to check them out!
 
 ![Art by me](art.png){style="border-radius: 50%;"}
 
