@@ -93,7 +93,6 @@ shinyApp(ui, server)
 {{< include tf.csv >}}
 ```
 
-
 ```{sql}
 #| connection: con_wai
 #| output.var: "table2"
@@ -139,6 +138,8 @@ server <- function(input, output, session){
     if (input$option == "nothing"){
       #| fig.alt: "A line plot titled mean absorbance from babies. There is one line representing all babies. The x-axis is frequency and the y-axis is mean absorbance. "
       table2 %>%
+        group_by(freq) %>%
+        summarize(mean_absorbance = mean(mean_absorbance)) %>%
         ggplot(aes(x = freq, y = mean_absorbance)) +
         geom_point(color = "purple") +
         geom_line(se = FALSE) +
@@ -165,7 +166,6 @@ shinyApp(ui, server)
 ## file: df.csv
 {{< include df.csv >}}
 ```
-
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 dbDisconnect(con_wai)
 ```
