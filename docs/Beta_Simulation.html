@@ -182,6 +182,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./Pets_SriLanka.html">
  <span class="dropdown-text">Pet Ownership in Sri Lanka</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Micromobile_Vehicles.html">
+ <span class="dropdown-text">Public Micromobile Vehicle Usage in Austin, Texas</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -206,11 +210,11 @@ window.Quarto = {
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-past-research">    
         <li>
     <a class="dropdown-item" href="./SIBDS.html">
- <span class="dropdown-text">Summer Institute in Biostatistics and Data Science Research</span></a>
+ <span class="dropdown-text">Heart Rate Variability as a Measure of Health</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./tda_research.html">
- <span class="dropdown-text">Kenneth Cooke Fellowship Research</span></a>
+ <span class="dropdown-text">Enhanced Persistence in Topological Data Analysis</span></a>
   </li>  
     </ul>
   </li>
@@ -334,16 +338,16 @@ window.Quarto = {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     n PI_percentage     lower     upper     cover alpha beta mean_in_interval
-1  165          0.95 0.3863963 0.6188978 0.9433615    33   33             TRUE
-2  394          0.95 0.4205322 0.5788141 0.9485316    75   75             TRUE
-3  244          0.95 0.4301487 0.5671758 0.9491690   101  101             TRUE
-4  257          0.95 0.3272135 0.6789989 0.9515214    15   15             TRUE
-5  176          0.95 0.4263808 0.5760226 0.9409423    79   79             TRUE
-6  356          0.95 0.3786853 0.6169134 0.9418351    31   31             TRUE
-7  462          0.95 0.4048408 0.6013319 0.9494835    49   49             TRUE
-8  301          0.95 0.4435857 0.5628093 0.9597472   149  149             TRUE
-9  453          0.95 0.4434644 0.5598050 0.9583527   153  153             TRUE
-10 289          0.95 0.4130092 0.5750640 0.9452438    71   71             TRUE</code></pre>
+1  448          0.95 0.3133006 0.6960719 0.9553258    13   13             TRUE
+2  127          0.95 0.4456776 0.5524445 0.9580975   181  181             TRUE
+3  257          0.95 0.4206523 0.5808232 0.9734981    95   95             TRUE
+4  196          0.95 0.3729660 0.6187805 0.9316374    27   27             TRUE
+5  175          0.95 0.4074442 0.5936723 0.9674676    65   65             TRUE
+6    5          0.95 0.3728470 0.5862342 0.9997343   199  199             TRUE
+7  321          0.95 0.4431252 0.5568730 0.9509708   149  149             TRUE
+8  233          0.95 0.4398279 0.5531061 0.9467212   147  147             TRUE
+9  471          0.95 0.4041044 0.6007542 0.9334065    43   43             TRUE
+10 154          0.95 0.3853175 0.6231297 0.9551700    35   35             TRUE</code></pre>
 </div>
 </div>
 <p>This is a random sample of rows from the actual dataset, which has 48902 rows and 8 columns. Each row corresponds to a simulated random sample of size n from a beta distribution with parameters alpha and beta. For each random sample, a normal prediction interval was generated with bounds “lower” and “upper”. “PI_percentage” refers to the intended coverage probability and “cover” refers to the actual coverage probability of said prediction interval over the beta distribution the data was generated from. “mean_in_interval” is a binary variable that states if the prediction interval covered the mean of the distribution.</p>

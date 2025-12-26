@@ -176,11 +176,11 @@ window.Quarto = {
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-past-research">    
         <li>
     <a class="dropdown-item" href="./SIBDS.html">
- <span class="dropdown-text">Summer Institute in Biostatistics and Data Science Research</span></a>
+ <span class="dropdown-text">Heart Rate Variability as a Measure of Health</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./tda_research.html">
- <span class="dropdown-text">Kenneth Cooke Fellowship Research</span></a>
+ <span class="dropdown-text">Enhanced Persistence in Topological Data Analysis</span></a>
   </li>  
     </ul>
   </li>
@@ -350,7 +350,7 @@ window.Quarto = {
 </section>
 <section id="v.-conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="v.-conclusion">V. Conclusion</h2>
-<p>This analysis has limitations that undoubtedly impacted the results shown. First, it is very possible that the errors in this data are correlated to each other through time. A model that assumed correlation between errors through time might have been better at accurately modeling public micromobile usage. It was an intentional choice to not use a model with this assumption, as the only model with this assumption covered in 500 was the autoregressive model, which is not suited to taking multiple observations from the exact same time periods. A choice could have been to make an autoregressive model for each council district, but assessing whether or not the council district micromobile vehicles reside in has any influence on their usage would have been determined purely through visual inspection of these model fits, whereas median regression allowed for hypothesis testing to be performed on each of the dummy parameters associated with council district. Median regression was thus deemed to be better suited to the inference purposes of this analysis. It is also possible that errors were correlated by geographic location, as some council districts are closer to each other than they are to others. Median regression was chosen over a model that considered this possible geographic correlation to simplify the modelling process.</p>
+<p>This analysis has limitations that undoubtedly impacted the results shown. First, it is very possible that the errors in this data are correlated to each other through time. A model that assumed correlation between errors through time might have been better at accurately modeling public micromobile usage. It is also possible that errors were correlated by geographic location, as some council districts are closer to each other than they are to others. Median regression was chosen over a model that considered these posssible correlation structures to simplify the modelling process.</p>
 <p>There are potential avenues further analysis of this data could take. Although all dummy variables were significant, that only signifies that usage of micromobile vehicles between district 1 and a district represented by a dummy variable is different. Further pairwise comparison between other pairs of council districts could yield further insights into how micromobile vehicle usage is different among them. This data could also be paired with demographic variables corresponding to each of the council districts to narrow down possible reasons for these geographic differences in public micromobile vehicle usage.</p>
 </section>
 <section id="vi.-works-cited" class="level2">
