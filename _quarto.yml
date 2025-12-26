@@ -17,6 +17,7 @@ website:
         menu:
           - Pets_SriLanka.qmd
           - Micromobile_Vehicles.qmd
+          - bayesian_heart.qmd
       - text: "Simulations"
         menu: 
           - Beta_Simulation.qmd

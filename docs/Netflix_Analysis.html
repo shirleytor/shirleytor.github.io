@@ -157,6 +157,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./Micromobile_Vehicles.html">
  <span class="dropdown-text">Public Micromobile Vehicle Usage in Austin, Texas</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./bayesian_heart.html">
+ <span class="dropdown-text">Maximum Heart Rate in Healthy and Unhealthy People</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -252,83 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>This dataset consists of tv shows and movies available on Netflix as of 2019. The dataset is collected from Flixable which is a third-party Netflix search engine.</em></p>
 <p><em>In 2018, they released an interesting report which shows that the number of TV shows on Netflix has nearly tripled since 2010. The streaming service’s number of movies has decreased by more than 2,000 titles since 2010, while its number of TV shows has nearly tripled. It will be interesting to explore what all other insights can be obtained from the same dataset.</em></p>
 </blockquote>
-<p>Here is the data dictionary (sourced from <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md?plain=1">here</a>):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 23%">
-<col style="width: 23%">
-<col style="width: 52%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">variable</th>
-<th style="text-align: left;">class</th>
-<th style="text-align: left;">description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">show_id</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Unique ID for every Movie / Tv Show</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">type</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Identifier - A Movie or TV Show</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">title</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Title of the Movie / Tv Show</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">director</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Director of the Movie/Show</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">cast</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Actors involved in the movie / show</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">country</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Country where the movie / show was produced</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">date_added</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Date it was added on Netflix</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">release_year</td>
-<td style="text-align: left;">double</td>
-<td style="text-align: left;">Actual Release year of the movie / show</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">rating</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">TV Rating of the movie / show</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">duration</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Total Duration - in minutes or number of seasons</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">listed_in</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Genre</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">description</td>
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">Summary description of the film/show</td>
-</tr>
-</tbody>
-</table>
+<p>Here is the data dictionary (sourced from <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md?plain=1">here</a>): d | variable | class | description | |:—————-|:—————-|:————————————-| | show_id | character | Unique ID for every Movie / Tv Show | | type | character | Identifier - A Movie or TV Show | | title | character | Title of the Movie / Tv Show | | director | character | Director of the Movie/Show | | cast | character | Actors involved in the movie / show | | country | character | Country where the movie / show was produced | | date_added | character | Date it was added on Netflix | | release_year | double | Actual Release year of the movie / show | | rating | character | TV Rating of the movie / show | | duration | character | Total Duration - in minutes or number of seasons | | listed_in | character | Genre | | description | character | Summary description of the film/show |</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>netflix <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

@@ -19,22 +19,7 @@ This project consists of me analyzing data about Netflix shows and movies, with 
 >
 > *In 2018, they released an interesting report which shows that the number of TV shows on Netflix has nearly tripled since 2010. The streaming service's number of movies has decreased by more than 2,000 titles since 2010, while its number of TV shows has nearly tripled. It will be interesting to explore what all other insights can be obtained from the same dataset.*
 
-Here is the data dictionary (sourced from [here](https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md?plain=1)):
-
-| variable     | class     | description                                      |
-|:----------------|:----------------|:-------------------------------------|
-| show_id      | character | Unique ID for every Movie / Tv Show              |
-| type         | character | Identifier - A Movie or TV Show                  |
-| title        | character | Title of the Movie / Tv Show                     |
-| director     | character | Director of the Movie/Show                       |
-| cast         | character | Actors involved in the movie / show              |
-| country      | character | Country where the movie / show was produced      |
-| date_added   | character | Date it was added on Netflix                     |
-| release_year | double    | Actual Release year of the movie / show          |
-| rating       | character | TV Rating of the movie / show                    |
-| duration     | character | Total Duration - in minutes or number of seasons |
-| listed_in    | character | Genre                                            |
-| description  | character | Summary description of the film/show             |
+Here is the data dictionary (sourced from [here](https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md?plain=1)): d \| variable \| class \| description \| \|:----------------\|:----------------\|:-------------------------------------\| \| show_id \| character \| Unique ID for every Movie / Tv Show \| \| type \| character \| Identifier - A Movie or TV Show \| \| title \| character \| Title of the Movie / Tv Show \| \| director \| character \| Director of the Movie/Show \| \| cast \| character \| Actors involved in the movie / show \| \| country \| character \| Country where the movie / show was produced \| \| date_added \| character \| Date it was added on Netflix \| \| release_year \| double \| Actual Release year of the movie / show \| \| rating \| character \| TV Rating of the movie / show \| \| duration \| character \| Total Duration - in minutes or number of seasons \| \| listed_in \| character \| Genre \| \| description \| character \| Summary description of the film/show \|
 
 ```{r, warning=FALSE, message=FALSE}
 netflix <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv')
