@@ -22,7 +22,7 @@ This project consists of me analyzing data about Netflix shows and movies, with 
 Here is the data dictionary (sourced from [here](https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20/readme.md?plain=1)):
 
 | variable     | class     | description                                      |
-|:-------------|:----------|:-------------------------------------------------|
+|:----------------|:----------------|:-------------------------------------|
 | show_id      | character | Unique ID for every Movie / Tv Show              |
 | type         | character | Identifier - A Movie or TV Show                  |
 | title        | character | Title of the Movie / Tv Show                     |
@@ -37,7 +37,7 @@ Here is the data dictionary (sourced from [here](https://github.com/rfordatascie
 | description  | character | Summary description of the film/show             |
 
 ```{r, warning=FALSE, message=FALSE}
-netflix <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv')
+netflix <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv')
 ```
 
 ## Netflix Horror Movies

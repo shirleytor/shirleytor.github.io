@@ -1,5 +1,5 @@
 ---
-title: "Kenneth Cooke Fellowship Research"
+title: "Enhanced Persistence in Topological Data Analysis"
 resources: 
   -Ken_Cooke_Fellowship--.pdf
 ---

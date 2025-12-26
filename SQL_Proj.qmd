@@ -166,6 +166,7 @@ shinyApp(ui, server)
 ## file: df.csv
 {{< include df.csv >}}
 ```
+
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 dbDisconnect(con_wai)
 ```

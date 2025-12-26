@@ -153,6 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./Pets_SriLanka.html">
  <span class="dropdown-text">Pet Ownership in Sri Lanka</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Micromobile_Vehicles.html">
+ <span class="dropdown-text">Public Micromobile Vehicle Usage in Austin, Texas</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -246,10 +250,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Stats Work/Data Science HW/shirleytor.github.io/animal_prices.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Price_in_Rupees=</span><span class="fu">as.numeric</span>(<span class="fu">str_remove_all</span>(Price, <span class="st">"[,Rs]"</span>)))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>unique<span class="ot">&lt;-</span><span class="fu">unique</span>(data[,<span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">getwd</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"animal_prices.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Price_in_Rupees=</span><span class="fu">as.numeric</span>(<span class="fu">str_remove_all</span>(Price, <span class="st">"[,Rs]"</span>)))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>unique<span class="ot">&lt;-</span><span class="fu">unique</span>(data[,<span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data used for this analysis originates from Ikman.lk, a popular website for buying pets in Sri Lanka. It was collected through a script that compiles data from posts about pet sales (Jayawardena). The dataset itself has eleven variables, with one of them consisting of a url identifier for the post it pertains to. For the purpose of this analysis, only three variables are being examined: pet price, which is a numeric continuous variable, type of animal being sold, which is a categorical variable, and city where the animal is being sold, which is also a categorical variable. Pet price is measured in Rupees, Sri Lanka’s national currency, and is the response variable in this analysis. Type of pet being sold is an explanatory variable that consists of the following pet types: dog, cat, fish, and bird. City where the pet is being sold is also an explanatory variable that consists of the cities of Gampaha, Kandy, and Colombo. In order for all sample groups in this analysis to be balanced, they all have the same sample size of 10 different pet prices. The total sample size across all sample groups is 120 different pet prices. The sample groups were formed by using R to filter for pet prices corresponding to a specific pet type and Sri Lankan city-district. Two random districts corresponding to a specific city were chosen, and the first five prices related to a specific pet from each district were chosen to be part of the city sample. For instance, the first five bird prices from Kadawatha, Gampaha and the first five bird prices from Kiribathgoda, Gampaha were chosen to form the sample corresponding to bird prices in Gampaha. Since the data is ordered randomly and the districts were chosen randomly, there is no bias involved with the selection of the data. Each of these samples is thus random and can be used for inference. Due to the small sample size per sample group, it is unlikely they reflect the actual population of pet prices corresponding to a specific animal in a specific city. The sample size should still be large enough to determine if either factor affects pet price, however.</p>
 <p>Data cleaning that samples from city-pet categories with 5 or more observations is performed with the code below.</p>

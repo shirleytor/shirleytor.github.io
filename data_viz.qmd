@@ -21,6 +21,7 @@ This interactive graph looks at world fairs. According to Wikipedia,
 Due to various factors, however, it is possible that world fairs might not be as representative of nations worldwide as their description and name would suggest. Ideally, as many nations as possible should be included in a world fair in order for it to be truly representative. As such, I track the number of countries that have attended world fairs from 1851 to 2021 to see how world fairs have evolved in terms of country representation.
 
 ```{r, include=FALSE, warning=FALSE, message=FALSE}
+setwd(getwd())
 fair_data <- read_csv("worlds_fairs.csv") %>%
   mutate(fair_length = case_when(
     start_year == end_year ~ end_month - start_month,
@@ -77,7 +78,6 @@ Data source [here](https://github.com/rfordatascience/tidytuesday/tree/master/da
 ## Total carbon dioxide emissions from major natural resource companies
 
 This interactive graph looks at emissions of carbon dioxide from major natural resource companies. The dataset used for this analysis originates from a [Carbon Majors](https://carbonmajors.org) [database](https://carbonmajors.org/Downloads).
-
 
 ```{shinylive-r}
 #| fig.alt: "A line plot titled total emissions of co2 based on source. The x-axis is year and the y-axis is total emissions of co2 in million tonnes. There are nine lines on the plot and each line represents a different commodity. The nine commodoties represented are anthacite coal, bitumunous coal, cement, lignite coal, metallurgical coal, natural gas, oil, sub-bituminuous coal, and thermal coal. After the year 1950, the lines for oil, bituminuous coal, and natural gas are all higher than the other lines. After 1950, the line for oil is the highest, the line for bituminous coal is the second highest, and the line for natural gas is the third highest."

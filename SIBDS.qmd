@@ -1,5 +1,5 @@
 ---
-title: "Summer Institute in Biostatistics and Data Science Research"
+title: "Heart Rate Variability as a Measure of Health"
 resources: 
   -sibds_poster.pdf
 ---
