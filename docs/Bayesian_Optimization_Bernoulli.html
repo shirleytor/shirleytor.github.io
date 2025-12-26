@@ -340,9 +340,9 @@ window.Quarto = {
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(TS_mean_parameters, TS_standard_deviation, actual_parameters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  TS_mean_parameters TS_standard_deviation actual_parameters
-1          0.7188314            0.05776228              0.81
-2          0.4204346            0.12733355              0.49
-3          0.3244849            0.10534474              0.37</code></pre>
+1          0.7900408            0.04935008              0.81
+2          0.4526707            0.14110092              0.49
+3          0.3858805            0.11035970              0.37</code></pre>
 </div>
 </div>
 <p>I used Thomas Sampling 100 times, with each time involving 100 iterations. “TS_parameters” displays the means of all the values most likely to be a specific parameter. Each of these values was determined by both the posteriors produced at the 100th iteration of every Thomas sample and the squared error loss function. “TS_standard_deviation” displays the sample standard deviation of all these values. The standard deviations would most likely have lower absolute values if informative priors had been used. They were quite large for estimations of <span class="math inline">\(p = .49\)</span> and <span class="math inline">\(p=.37\)</span>, which would be problematic if only one Thomas Sample with <span class="math inline">\(100\)</span> observations had been used. Thomas Sampling at this sample size might result in more stable estimates with informative priors.</p>
