@@ -247,3 +247,39 @@ City of Austin, Texas - data.austintexas.gov. “Shared Micromobility Vehicle Tr
 Zaheen, Saima, et al. “Systematic Micromobility Planning to Promote Public Transit Use in Underserved Communities: A Case Study.” Journal of Transport and Sustainability, Dec. 2025, pp. 1–16. https://doi.org/10.1108/jtas-07-2025-0043.
 
 Zhang, Yongping, et al. “A Comparative Analysis of the Potential of Carbon Emission Reductions From Shared Micro-mobility.” Sustainable Energy Technologies and Assessments, vol. 72, Nov. 2024, p. 104088. https://doi.org/10.1016/j.seta.2024.104088.
+
+## VII. Appendix
+
+### I. Variables
+
+```{r, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+Variables <- c("total distance", "council district", "day", "month", "year", "hour")
+Type1 <- c("target","predictor","predictor","predictor","predictor","predictor")
+Type2 <- c("continuous", "factor", "discrete numeric", "discrete numeric", "discrete numeric", "discrete numeric")
+Description <- c("the total distance in meters travelled by all public micromobile vehicle trips across all day-hour times frame in a specific district-month-year trio",
+                 "the Austin, Texas, council district where all trips that contributed to the total distance began",
+                 "a day of the week",
+                 "a specific month in a year",
+                 "a specific year",
+                 "a specific hour in a day")
+Coding <- c("represented as a positive real value",
+            "numeric value corresponding to the ten council districts in Austin, Texas, ie Council District 1 is represented as 1, Council District 2 is represented as 2, and so on. There are 10 council districts",
+            "Sunday = 1, Monday = 2, Tuesday = 3, Wednesday = 4, Thursday = 5, Friday = 6, Saturday = 7",
+            "January = 1, February = 2, March = 3, April = 4, May = 5, June = 6, July = 7, August = 8, September = 9, October = 10, November = 11, December = 12",
+            "The following are all the unique values in this variable: 2018, 2019, 2020, 2021, 2022",
+            "12:00am-1:00am is represented as 1, 1:00am-2:00am is represented as 2,..., 11:00pm-12:00am is represented at 24")
+
+data.frame(Variables, Type1, Type2, Description, Coding) %>%
+  kable(format = "html")
+
+
+```
+
+### II. Regression Coefficients
+
+```{r, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+time_sum <- time_fit %>% summary()
+time_sum$coefficients %>%
+  as.data.frame()  %>%
+  kable(format = "html")
+```

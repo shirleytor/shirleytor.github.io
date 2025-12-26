@@ -147,7 +147,6 @@ mcmc_data <- list(
 
 The following specifications for the standard deviation priors were made: $\alpha_0 = \alpha_1 = 20$ and $\beta_0 = \beta_1 = 1$. The parameters for the prior of the heart disease population mean were specified as $\mu_1 = 157$ and $\tau_1 = 12$, while the parameters for the prior of the healthy population were specified as $\mu_0 = 167$ and $\tau_0 = 12$. These decisions were based on the commonly known manner for calculating maximum heart rate, $220 - age$. Since the sample consisted of all adults, the mean priors approximately cover $(220-79,220-18)$, reflected in Figure 1. Similarly, given this large range of adult maximum heart rates, it was assumed the population standard deviations for both groups was at minimum approximately $10$ and at maximum approximately $30$, which the shared gamma prior in Figure 1 for both populations reflects. $\mu_1$ is smaller than $\mu_0$ to reflect knowledge in the literature about the reduced heart rate capabilities of people with heart disease.
 
-
 ```{r, prior predictive sampling, echo=FALSE}
 norm_prior <- stan(
     file = "/Users/shirleytoribio/Stats Work/Portfolio Projects/shirleytor.github.io/551_prior.stan", data = mcmc_data,
@@ -245,7 +244,6 @@ hpost1 / hpost2 / hpost3 + plot_annotation(
 
 Based on figure 6, the maximum heart rate means of both populations are different by at least 10. Figure 4 also shows a little overlap between the distributions of both population standard deviations but not much. Overall, the difference in the distributions of population standard deviations is a lot less pronounced than the difference in the distributions of population means, although there is still a major difference. Based on the calculation outlined in step 6 of section 4, the probability of any healthy subject having a maximum heart rate greater than that of someone with heart disease is approximately 1, meaning it is extremely likely this will be the case. These results indicate that the maximum heart rate of the typical healthy person is higher than the maximum heart rate of a typical person with heart disease, which follows trends in the literature on heart rate.
 
-
 ```{r, graphing posterior draws, warning=FALSE, message=FALSE, echo=FALSE, results='show'}
 draws <- as.data.frame(norm_posterior)
 color_scheme_set("mix-teal-pink")
@@ -259,7 +257,6 @@ postmu / postsigma + plot_annotation(
   title = "Figure 6. Posterior distributions"
 )
 ```
-
 
 ```{r, probability healthy max hr greater than diseased max hr, echo=FALSE}
 set.seed(123)
