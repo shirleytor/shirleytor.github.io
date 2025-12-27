@@ -168,6 +168,7 @@ With the establishment that the errors for the response value most likely origin
 By applying an inverse function of the Box Cox transformation to the fitted values calculated by the model, the fitted values of the original response variable were obtained and subsequently plotted alongside the predictor variables.
 
 ```{r visualization, echo=FALSE, results='show', warning=FALSE, message=FALSE, fig.align='center', fig.width=10, fig.height=4}
+time_fit <- rq(1/(total_dist^(1/50)) ~ council_district_start + poly(day_of_week,5) + poly(hour,4) + poly(month,5), data = time_data)
 fit_tot_dist <- 1/(time_fit$fitted.values^(50))
 
 graph_data <- time_data %>%
